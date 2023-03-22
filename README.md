@@ -17,9 +17,9 @@ do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa xxx
 | Aluno            | Função           | GitHub                                                         | LinkedIn                                              |
 | ---------------- | ---------------- | -------------------------------------------------------------- | ----------------------------------------------------- |
 
-|__Caio Costa Santos__  |  *Product Owner* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) |
+|__Caio Costa Santos__  |  *Development Team* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) |
 
-|__Juliana Francisco__| *Development Team* | [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)      | [![](https://bit.ly/2P1ZogM)
+|__Juliana Francisco__| *Product Owner* | [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)      | [![](https://bit.ly/2P1ZogM)
 
 |__Murilo Brissi__| *Scrum Master* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)      | [![](https://bit.ly/2P1ZogM)
 
