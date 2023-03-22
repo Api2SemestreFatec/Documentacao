@@ -18,9 +18,9 @@ Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Seme
 
 __Caio Costa Santos__  *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif) [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
-__Davi Ramos Andrade__  *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/DaviRamosAndrade)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
+__Davi Ramos Andrade__  *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/DaviRamosAndrade) [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
-__Isaque Costa Beirão__ *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/isaquebeirao)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
+__Isaque Costa Beirão__ *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/isaquebeirao) [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
 __Juliana Francisco__ *Product Owner* [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)       [![](https://bit.ly/2P1ZogM)
 
@@ -79,6 +79,7 @@ CR e colaborador.
 * ### __Gerenciador De Projeto__
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Microsoft Teams](https://logodownload.org/wp-content/uploads/2021/08/microsoft-teams-logo-0.png)
 
 
 * ### __Armazenamento De Dados__
