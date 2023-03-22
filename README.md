@@ -22,9 +22,9 @@ __Davi Ramos Andrade__  *Development Team* [![](https://bit.ly/3f9Xo0P)](https:/
 
 __Isaque Costa Beirão__ *Development Team* [![](https://bit.ly/3f9Xo0P)](https://github.com/isaquebeirao)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
-__Juliana Francisco__ *Product Owner* [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)      | [![](https://bit.ly/2P1ZogM)
+__Juliana Francisco__ *Product Owner* [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)       [![](https://bit.ly/2P1ZogM)
 
-__Murilo Brissi__ *Scrum Master* [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)      | [![](https://bit.ly/2P1ZogM)
+__Murilo Brissi__ *Scrum Master* [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)       [![](https://bit.ly/2P1ZogM)
 
 
 ## 👨‍🏫 Disciplinas Integradas:
@@ -70,7 +70,7 @@ CR e colaborador.
 
 * ### __Front-End__
 
-![]((https://user-images.githubusercontent.com/63621128/227061228-eca0d964-42ae-4eca-bcfc-f6248d9999ad.png)n)
+
 
 * ### __Back-End__
 
@@ -79,7 +79,6 @@ CR e colaborador.
 * ### __Gerenciador De Projeto__
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-
 
 
 * ### __Armazenamento De Dados__
