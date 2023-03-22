@@ -9,26 +9,22 @@
 
 
 ## Fatec São José dos Campos, SP - PBLTeX  
-Aprendizagem por Projetos Integrados de 2023-1, Avaliação Democratizada baseada na técnica de Avaliação 360º, trabalho realizado pelo 2º Semestre 
-do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa xxxxx 
+Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Semestre do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa 2RP 
 
 ## 👨‍💻 👩‍💻 Equipe Yakiramenai: Integrantes
 
 | Aluno            | Função           | GitHub                                                         | LinkedIn                                              |
 | ---------------- | ---------------- | -------------------------------------------------------------- | ----------------------------------------------------- |
 
-|__Caio Costa Santos__  |  *Development Team* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) |
+|__Caio Costa Santos__  |*Development Team*| [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
-|__Juliana Francisco__| *Product Owner* | [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)      | [![](https://bit.ly/2P1ZogM)
+|__Davi Ramos Andrade__  |*Development Team*| [![](https://bit.ly/3f9Xo0P)](https://github.com/DaviRamosAndrade)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
-|__Murilo Brissi__| *Scrum Master* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)      | [![](https://bit.ly/2P1ZogM)
+|__Isaque Costa Beirão__|*Development Team*| [![](https://bit.ly/3f9Xo0P)](https://github.com/isaquebeirao)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195) 
 
+|__Juliana Francisco__|*Product Owner*| [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)      | [![](https://bit.ly/2P1ZogM)
 
-
-
-
-
-
+|__Murilo Brissi__|*Scrum Master*| [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)      | [![](https://bit.ly/2P1ZogM)
 
 
 ## 👨‍🏫 Disciplinas Integradas:
@@ -38,37 +34,52 @@ do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa xxx
 - Arquitetura e Modelagem de Banco de Dados - Professor: Emanuel Mineda Carneiro
 
 ## 🎯 Objetivo
-Aguardando kick-off
+Desenvolver um sistema que faça o controle da jornada de trabalho do colaborador, identifique e classifique horas extras, controle das horas extras e sobreavisos.
 
 ## 💬 Descritivo do Projeto
+• Usuários devem ter perfis diferentes: administrador (acesso as informações de parametrização,
+extração de relatórios e aprovação), gestor (aprovação e lançamento) e colaborador (apontar
+horas);
+• Apontamento de horas extras e classificação das horas;
+• Lançamento de horas de sobreaviso;
+• No lançamento da hora extra especificar cliente, CR (centro de resultado), projeto, solicitante e
+justificativa;
+• Cadastro de clientes e CRs;
+• Recurso para aprovação de horas extras executadas;
+• Parametrização de sistema (período de fechamento das horas, percentual de classificação das
+horas extras e adicional noturno juntamente com as verbas salariais, definição dos horários de
+início e fim de horas noturnas);
+• Extração de relatório csv de todos os colaboradores com as horas trabalhadas (matrícula, nome,
+verba, quantidade de horas, cliente, CR, projeto, justificativa);
+• Aplicar regras de horas extras e sobreavisos na extração (classificação de HEs e cálculo do
+sobreaviso considerando as HEs conflitantes);
+• Dashboard com acompanhamento em tempo real das horas extras executadas com filtro cliente,
+CR e colaborador.
 
-Aguardando kick-off
 ## 🛠️ Ferramentas/Tecnologias
 
 * ### __Front-End__
 
-![](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=darkgreen)
+![]((https://user-images.githubusercontent.com/63621128/227061228-eca0d964-42ae-4eca-bcfc-f6248d9999ad.png)n)
 
 * ### __Back-End__
 
-![](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=darkgreen)
+
 
 * ### __Gerenciador De Projeto__
 
-![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
+![Microsoft Teams](![Uploading Microsoft_Office_Teams_(2018–present).svg.png…]()
+for-the-badge&logo=notion&logoColor=white) ![Uploading Microsoft_Office_Teams_(2018–present).svg.png…]()
+
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
 
 
 * ### __Armazenamento De Dados__
 
-![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
+
 
 * ### __Wireframe__
-
-![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-
-
-
 
 
 
