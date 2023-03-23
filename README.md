@@ -69,7 +69,8 @@ CR e colaborador.
 ## 🛠️ Ferramentas/Tecnologias
 
 * ### __Front-End__
-![Java]((https://img.shields.io/badge/java-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)![java-programming-language-icon](https://user-images.githubusercontent.com/63621128/227070340-1d13ef5b-5246-4701-9f2f-fd0b7e0eae38.png)
+
 
 
 * ### __Back-End__
@@ -79,7 +80,7 @@ CR e colaborador.
 * ### __Gerenciador De Projeto__
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Microsoft Teams](https://img.shields.io/badge/teams-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Microsoft Teams](https://logodownload.org/wp-content/uploads/2021/08/microsoft-teams-logo-4.png)
 
 
 * ### __Armazenamento De Dados__
