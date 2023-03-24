@@ -69,27 +69,27 @@ CR e colaborador.
 ## 🛠️ Ferramentas/Tecnologias
 
 * ### __Front-End__
-[JavaFX](https://openjfx.io/)
+ - [JavaFX](https://openjfx.io/)
 
-- Ferramenta de desenho: [Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
+ - Ferramenta de desenho: [Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
 
 
 * ### __Back-End__
-[Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
+ - [Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
 
-- Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
+ - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
 
 * ### __Gerenciador De Projeto__
 
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+ - ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 
 * ### __Armazenamento De Dados__
-[PostgreSQL](https://www.postgresql.org/download/)
+ - [PostgreSQL](https://www.postgresql.org/download/)
 
 
 * ### __Wireframe__
-
+ - [Telas do protótipo](shorturl.at/pHP38)
 
 # Documentação
 
