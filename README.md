@@ -69,27 +69,26 @@ CR e colaborador.
 ## 🛠️ Ferramentas/Tecnologias
 
 * ### __Front-End__
+![JavaFX](https://openjfx.io/)
 
-
+- Ferramenta de desenho: ![Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
 
 
 * ### __Back-End__
+![Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
 
-
+- Ferramenta de desenvolvimento: ![Intellij Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
 
 * ### __Gerenciador De Projeto__
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 
-
 * ### __Armazenamento De Dados__
-
+![PostgreSQL](https://www.postgresql.org/download/)
 
 
 * ### __Wireframe__
-
-
 
 
 # Documentação
@@ -97,14 +96,12 @@ CR e colaborador.
 ## Entregas
 - [Kick-Off] - 13/02 à 03/03
 - [Sprint 1] - 13/03/2023 a 02/04/2023
-- [Sprint 2) - 
-- [Sprint 3] - 
-- [Sprint 4] - 
+- [Sprint 2) - 03/04/2023 a 23/04/2023
+- [Sprint 3] - 24/04/2023 a 14/05/2023
+- [Sprint 4] - 15/05/2023 a 04/06/2023
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
 # 📝 Product Backlog
 
-Todo o Backlog priorizado por valor, se encontra em:
+Todo o Backlog priorizado por valor, se encontra em: ![Backlog]()
