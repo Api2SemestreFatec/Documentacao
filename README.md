@@ -1,4 +1,4 @@
-# Projeto-API-Equipe-Yakiramenai
+# Projeto-API-Equipe-Akiramenai
  
 # 🎓 Aprendizado por Projeto Integrador
 * FATEC São José dos Campos - Prof. Jessen Vidal
