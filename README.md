@@ -69,15 +69,15 @@ CR e colaborador.
 ## 🛠️ Ferramentas/Tecnologias
 
 * ### __Front-End__
-![JavaFX](https://openjfx.io/)
+[JavaFX](https://openjfx.io/)
 
-- Ferramenta de desenho: ![Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
+- Ferramenta de desenho: [Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
 
 
 * ### __Back-End__
-![Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
+[Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
 
-- Ferramenta de desenvolvimento: ![Intellij Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
+- Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
 
 * ### __Gerenciador De Projeto__
 
@@ -85,7 +85,7 @@ CR e colaborador.
 
 
 * ### __Armazenamento De Dados__
-![PostgreSQL](https://www.postgresql.org/download/)
+[PostgreSQL](https://www.postgresql.org/download/)
 
 
 * ### __Wireframe__
@@ -104,4 +104,4 @@ CR e colaborador.
 
 # 📝 Product Backlog
 
-Todo o Backlog priorizado por valor, se encontra em: ![Backlog]()
+Todo o Backlog priorizado por valor, se encontra em: [Backlog]()
