@@ -81,7 +81,7 @@ CR e colaborador.
 
  
             
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original-wordmark.svg" width="40" height="40" /> - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
+ <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij/intellij-original.svg" width="40" height="40" /> - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
 
 * ### __Gerenciador De Projeto__
 
