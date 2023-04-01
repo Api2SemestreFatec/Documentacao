@@ -88,7 +88,8 @@ CR e colaborador.
 
 
 * ### __Armazenamento De Dados__
- - [PostgreSQL](https://www.postgresql.org/download/)
+ 
+ <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40" height="40" /> - [PostgreSQL](https://www.postgresql.org/download/)
 
 
 * ### __Wireframe__
