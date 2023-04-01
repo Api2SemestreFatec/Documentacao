@@ -76,9 +76,12 @@ CR e colaborador.
 
 * ### __Back-End__
  
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" height="40" />- [Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
+ <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" height="40" /> - [Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
+ 
 
- - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
+ 
+            
+ <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original-wordmark.svg" width="40" height="40" /> - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
 
 * ### __Gerenciador De Projeto__
 
