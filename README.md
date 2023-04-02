@@ -109,3 +109,27 @@ CR e colaborador.
 # 📝 Product Backlog
 
 Todo o Backlog priorizado por valor, se encontra em: [Backlog]()
+Sprint 1
+Definição do Product backlog 
+Atualização do Github
+Git sem funcionalidade
+Fluxograma
+Backlog
+
+Sprint 2
+Fazer a tela de login
+Fazer a tela do administrador
+Faze a tela de cadastros para o administrador
+
+Sprint 3
+Fazer a tela de lançamentos das horas trabalhadas do colaborador
+Fazer a tela de consultas das horas trabalhadas do colaborador
+Fazer a tela do colaborador
+
+Sprint 4
+Fazer a tela de relatórios do administrador
+Fazer a tela de lançamentos de horas do gestor
+Fazer a tela de aprovação de horas do gestor
+Fazer a tela de consulta de horas trabalhadas dos colaboradores
+Fazer a tela de consulta do gestor
+
