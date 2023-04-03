@@ -108,7 +108,7 @@ CR e colaborador.
 
 # 📝 Product Backlog
 
-Todo o Backlog priorizado por valor, se encontra em: Backlog
+Todo o Backlog priorizado por valor, se encontra em: 
 
 ## Sprint 1
 
