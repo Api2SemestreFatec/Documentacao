@@ -8,7 +8,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Fatec São José dos Campos, SP - PBLTeX  
+## Fatec São José dos Campos, SP - 2RP
 Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Semestre do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa 2RP 
 
 ## 👨‍💻 👩‍💻 Equipe Yakiramenai: Integrantes
