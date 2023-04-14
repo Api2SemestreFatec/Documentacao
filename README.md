@@ -18,10 +18,8 @@ Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Seme
 |__Caio Costa Santos__|  *Development Team* | [![](https://bit.ly/3f9Xo0P)](https://github.com/Caio-eng-gif)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/caio-costa-santos-7a7277195)|
 |__Davi Ramos Andrade__|  *Development Team*| [![](https://bit.ly/3f9Xo0P)](https://github.com/DaviRamosAndrade)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/daviramosandrade-frontend)| 
 |__Isaque Costa Beirão__| *Development Team*| [![](https://bit.ly/3f9Xo0P)](https://github.com/isaquebeirao)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/isaque-beirao-6b1769220/)| 
-|__Juliana Francisco__| *Product Owner*|  [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)| [![](https://bit.ly/2P1ZogM)]
-(https://www.linkedin.com/in/juliana-francisco-433a4492)|
-|__Murilo Brissi__| *Scrum Master*|  [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)| [![](https://bit.ly/2P1ZogM)]
-(https://www.linkedin.com/in/murilo-brissi-046326232)| 
+|__Juliana Francisco__| *Product Owner*|  [![](https://bit.ly/3f9Xo0P)](https://github.com/juliana-osss)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/juliana-francisco-433a4492)|
+|__Murilo Brissi__| *Scrum Master*|  [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/murilo-brissi-046326232)| 
 
 
 ## 👨‍🏫 Disciplinas Integradas:
