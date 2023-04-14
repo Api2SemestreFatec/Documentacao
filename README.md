@@ -114,14 +114,16 @@ Todo o Backlog priorizado por valor, se encontra em:
  - Backlog
 
 ## Sprint 2
-- Fazer a tela de login
-- Fazer a tela do administrador
-- Faze a tela de cadastros para o administrador
+- Desenhar tela do colaborador;
+- Funcionalidade do colaborador(apontar horas)
+- Funcionalidade do colaborador: listar todas as horas extras apontadas
+- Desenhar a tela do gestor
+- Funcionalidade do gestor: aprovação e apontamento de horas
 
 ## Sprint 3
 - Fazer a tela de lançamentos das horas trabalhadas do colaborador
 - Fazer a tela de consultas das horas trabalhadas do colaborador
-- Fazer a tela do colaborador
+- 
 
 ## Sprint 4
 - Fazer a tela de relatórios do administrador
