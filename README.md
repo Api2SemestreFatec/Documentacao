@@ -1,6 +1,6 @@
 ><h1> Projeto-API-Equipe-Yakiramenai
  
-+  Aprendizado por Projeto Integrador
++ Aprendizado por Projeto Integrador
 + FATEC São José dos Campos - Prof. Jessen Vidal
 
 + 2º Período - Banco De Dados
@@ -11,7 +11,7 @@
 ## Fatec São José dos Campos, SP - 2RP
 Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Semestre do curso de Banco De Dados na FATEC de São José dos Campos, para a empresa 2RP 
 
-## 👨‍💻 👩‍💻 Equipe Yakiramenai: Integrantes
+>##  Equipe Yakiramenai: Integrantes
 
 | Aluno            | Função           | GitHub                                                         | LinkedIn                                              |
 | ---------------- | ---------------- | -------------------------------------------------------------- | ----------------------------------------------------- |
@@ -22,16 +22,16 @@ Aprendizagem por Projetos Integrados de 2023-1, trabalho realizado pelo 2º Seme
 |__Murilo Brissi__| *Scrum Master*|  [![](https://bit.ly/3f9Xo0P)](https://github.com/Murilobss)| [![](https://bit.ly/2P1ZogM)](https://www.linkedin.com/in/murilo-brissi-046326232)| 
 
 
-## 👨‍🏫 Disciplinas Integradas:
+##  Disciplinas Integradas:
 
 - Laboratório de Desenvolvimento em Banco de Dados 2 - Professora: Adriana da Silva Jacinto
 - Linguagem de programação 1 - Professora: Adriana da Silva Jacinto
 - Arquitetura e Modelagem de Banco de Dados - Professor: Emanuel Mineda Carneiro
 
-## 🎯 Objetivo
+##  Objetivo
 Desenvolver um sistema que faça o controle da jornada de trabalho do colaborador, identifique e classifique horas extras, controle das horas extras e sobreavisos.
 
-## 💬 Descritivo do Projeto
+##  Descritivo do Projeto
 • Usuários devem ter perfis diferentes: administrador (acesso as informações de parametrização,
 extração de relatórios e aprovação), gestor (aprovação e lançamento) e colaborador (apontar
 horas);
@@ -64,10 +64,11 @@ CR e colaborador.
 > ##  Ferramentas/Tecnologias
 
 <div align="center" valign="top"><br>
-  <img align="center" alt="Java" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /> 
-  <img align="center" alt="PostgreSQL" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />     
-  <img align="center" alt="Intellij" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" />
-  <img align="center" alt="Github" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" /> 
+  <img align="center" alt="Java" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /> 
+  <img align="center" alt="PostgreSQL" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />     
+  <img align="center" alt="Intellij" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" />
+  <img align="center" alt="Github" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" /> 
+  <img align="center" alt="Discord" height="50" width="50" src= "https://user-images.githubusercontent.com/73692954/232239252-c3349425-d9fe-4449-9b9b-02bf56d39492.png"/>
 </div><br>
  
 > ### __Wireframe__
@@ -84,7 +85,7 @@ CR e colaborador.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-> # Product Backlog
+> #**Product Backlog**
 
 Todo o Backlog priorizado por valor, se encontra em: 
 
