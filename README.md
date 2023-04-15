@@ -1,9 +1,9 @@
-# Projeto-API-Equipe-Yakiramenai
+><h1> Projeto-API-Equipe-Yakiramenai
  
-# 🎓 Aprendizado por Projeto Integrador
-* FATEC São José dos Campos - Prof. Jessen Vidal
++  Aprendizado por Projeto Integrador
++ FATEC São José dos Campos - Prof. Jessen Vidal
 
-* 2º Período - Banco De Dados
++ 2º Período - Banco De Dados
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -61,38 +61,21 @@ sobreaviso considerando as HEs conflitantes);
 CR e colaborador.
 
 
-## 🛠️ Ferramentas/Tecnologias
+> ##  Ferramentas/Tecnologias
 
-* ### __Front-End__
- - [JavaFX](https://openjfx.io/)
-
- - Ferramenta de desenho: [Scene Builder - Gluon](https://gluonhq.com/products/scene-builder/)
-
-
-* ### __Back-End__
+<div align="center" valign="top"><br>
+  <img align="center" alt="Java" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /> 
+  <img align="center" alt="PostgreSQL" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />     
+  <img align="center" alt="Intellij" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" />
+  <img align="center" alt="Github" height="35" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" /> 
+</div><br>
  
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" height="40" /> - [Java versão 17](https://aws.amazon.com/pt/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
- 
-
- 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="40" height="40" /> - Ferramenta de desenvolvimento: [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
-
-* ### __Gerenciador De Projeto__
-
- - ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-
-
-* ### __Armazenamento De Dados__
- 
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40" height="40" /> - [PostgreSQL](https://www.postgresql.org/download/)
-
-
-* ### __Wireframe__
+> ### __Wireframe__
  - [Telas do protótipo](shorturl.at/pHP38)
 
-# Documentação
+># Documentação
 
-## Entregas
+>## Entregas
 - [Kick-Off] - 13/02 à 03/03
 - [Sprint 1] - 13/03/2023 a 02/04/2023
 - [Sprint 2) - 03/04/2023 a 23/04/2023
@@ -101,7 +84,7 @@ CR e colaborador.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# 📝 Product Backlog
+> # Product Backlog
 
 Todo o Backlog priorizado por valor, se encontra em: 
 
