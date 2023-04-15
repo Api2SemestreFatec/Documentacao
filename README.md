@@ -72,7 +72,7 @@ CR e colaborador.
 </div><br>
  
 > ### __Wireframe__
- - [Telas do protótipo](shorturl.at/pHP38)
+ - [Telas do protótipo]([shorturl.at/pHP38](https://github.com/Api2SemestreFatec/Documentacao/blob/Base/img/Wireframe%20(1).pdf))
 
 ># Documentação
 
