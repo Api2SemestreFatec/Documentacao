@@ -76,7 +76,7 @@ CR e colaborador.
 
 ># Documentação
 
->## Entregas
+>## Planejamento das Entregas
 - [Kick-Off] - 13/02 à 03/03  ✅
 - [Sprint 1] - 13/03/2023 a 02/04/2023  ✅
 - [Sprint 2) - 03/04/2023 a 23/04/2023
@@ -85,7 +85,7 @@ CR e colaborador.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
->## Product Backlog
+>## 📋 Product Backlog por Sprint
 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/73692954/233219050-cc0789b6-e124-4edb-902b-4fb151d3f46f.png" width="900px")
