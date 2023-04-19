@@ -87,7 +87,10 @@ CR e colaborador.
 
 >## Product Backlog
 
-Todo o Backlog priorizado por valor, se encontra em: 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/73692954/233219050-cc0789b6-e124-4edb-902b-4fb151d3f46f.png" width="900px")
+</div>
+
 
 
 # Sprint 1
