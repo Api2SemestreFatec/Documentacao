@@ -75,7 +75,7 @@ CR e colaborador.
 > ### __Wireframe__
  - [Telas do protótipo](https://github.com/Api2SemestreFatec/Documentacao/blob/Base/img/Wireframe%20(1).pdf)
 
->## Modelagem do Banco de Dados
+>## 🎲 Modelagem do Banco de Dados
 
 >## Planejamento das Entregas
 - [Kick-Off] - 13/02 à 03/03  ✅
