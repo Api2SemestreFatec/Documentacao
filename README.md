@@ -91,39 +91,3 @@ CR e colaborador.
 <img src="https://user-images.githubusercontent.com/73692954/233219050-cc0789b6-e124-4edb-902b-4fb151d3f46f.png" width="900px")
 </div>
 
-
-
-# Sprint 1
- - Definição do Product backlog 
- - Atualização do Github
- - Git sem funcionalida
- - Backlog
-
-# Sprint 2
- - Atualização do Github;
- - Atualização do backlog
-- Fluxograma
- - Wireframe 
-- Modelagem de Dados
-- Desenhar tela do colaborador;
-- Funcionalidade do colaborador (apontar horas)
-- Funcionalidade do colaborador: listar todas as horas extras apontadas
-- Desenhar a tela do gestor;
-- Funcionalidade do gestor: aprovação e apontamento de horas;
-
-# Sprint 3
- - Funcionalidade do ADM: Cadastro de clientes
- - Funcionalidade ADM: Cadastro de CR’s
-- Funcionalidade ADM: Cadastro de Colaborador
-- Funcionalidade ADM: Aprovação de horas extras
-- Dashboard com acompanhamento em tempo real das horas extras.
-
-# Sprint 4
-- Desenhar tela administrativa
-- Funcionalidade ADM: Extração de relatórios (CSV);
-- Funcionalidade ADM: acesso as informações de parametrização;
- - Funcionalidade: Classificação das horas;
- - Validação de Campos Sensíveis;
- - Gerar um executável;
- - Funcionalidade: dashboard filtrar por cliente, CR, ou colaborador;
- - Manual de preparação do ambiente;
