@@ -68,7 +68,8 @@ CR e colaborador.
   <img align="center" alt="PostgreSQL" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />     
   <img align="center" alt="Intellij" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" />
   <img align="center" alt="Github" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" /> 
-  <img align="center" alt="Discord" height="50" width="50" src= "https://user-images.githubusercontent.com/73692954/232239252-c3349425-d9fe-4449-9b9b-02bf56d39492.png"/>
+  <img align="center" alt="Discord" height="50" width="50" src="https://user-images.githubusercontent.com/73692954/232239252-c3349425-d9fe-4449-9b9b-02bf56d39492.png"/>
+  <img align="center" alt="Figma" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
 </div><br>
  
 > ### __Wireframe__
