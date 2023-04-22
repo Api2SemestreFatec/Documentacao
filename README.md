@@ -77,7 +77,7 @@ CR e colaborador.
 
 > ## 🎲 Modelagem do Banco de Dados
 <div align="center" valign="top"><br>
-<img align="center" height="450" width="700" src="https://user-images.githubusercontent.com/111446714/233804208-317f954f-c1ed-436e-af14-3463154bdaab.jpg"/>
+<img align="center" height="400" width="700" src="https://user-images.githubusercontent.com/111446714/233805454-5339fe80-6aa6-48d1-8aa4-3f48fea39cf3.png"/>
 </div><br>
 
 >## Planejamento das Entregas
