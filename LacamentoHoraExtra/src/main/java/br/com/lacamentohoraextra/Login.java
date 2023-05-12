@@ -23,7 +23,6 @@
  */
 package br.com.lacamentohoraextra;
 
-import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.DAO.LoginDAO;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.sql.SQLException;
@@ -171,8 +170,10 @@ public class Login extends javax.swing.JFrame {
                     adm.setVisible(true);
                     break;
                 case "2":
-                    System.out.println(Login.this);
-                    JOptionPane.showMessageDialog(Login.this, "Welcome, moderator!");
+                    dispose();
+                    setVisible(false);
+                    Gestor gestor = new Gestor();
+                    gestor.setVisible(true);
                     break;
                 case "3":
                     dispose();
@@ -188,7 +189,7 @@ public class Login extends javax.swing.JFrame {
         }
         catch (SQLException e) {
             Logger.getLogger(
-                    ConexaoSQL.class.getName()).log(
+                    Login.class.getName()).log(
                     Level.SEVERE,
                     e.getMessage(),
                     e);

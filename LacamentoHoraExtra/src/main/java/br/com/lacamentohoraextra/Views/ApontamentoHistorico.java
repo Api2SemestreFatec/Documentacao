@@ -43,41 +43,44 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
      */
     public ApontamentoHistorico() {
         initComponents();
-
-        try {
-            popularTabela();
-        }
-        catch (SQLException e) {
-            Logger.getLogger(
-                    ConexaoSQL.class.getName()).log(
-                    Level.SEVERE,
-                    e.getMessage(),
-                    e);
-        }
+        lblTotal.setText("Total: " + Integer.toString(0));
     }
 
-    public static void popularTabela() throws SQLException {
+    public void popularTabela() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setNumRows(0);
 
-        Object colunas[] = new Object[5];
-        ApontamentoModel apontamentoModel = new ApontamentoModel();
+        Thread thread = new Thread(() -> {
+            try {
+                Object colunas[] = new Object[5];
+                ApontamentoModel apontamentoModel = new ApontamentoModel();
 
-        ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
+                ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
+                listaDeApontamentos = ApontamentoDAO.listarApontamentosColaborador();
+                
+                for (int i = 0; i < listaDeApontamentos.size(); i++) {
+                    apontamentoModel = listaDeApontamentos.get(i);
 
-        listaDeApontamentos = ApontamentoDAO.listarApontamentosColaborador();
+                    colunas[0] = apontamentoModel.getData_apontamento();
+                    colunas[1] = apontamentoModel.getHora_apontamento();
+                    colunas[2] = apontamentoModel.getCliente_projeto();
+                    colunas[3] = apontamentoModel.getJustificativa();
+                    colunas[4] = apontamentoModel.getSituacao();
 
-        for (int i = 0; i < listaDeApontamentos.size(); i++) {
-            apontamentoModel = listaDeApontamentos.get(i);
+                    model.addRow(colunas);
 
-            colunas[0] = apontamentoModel.getData_apontamento();
-            colunas[1] = apontamentoModel.getHora_apontamento();
-            colunas[2] = apontamentoModel.getCliente_projeto();
-            colunas[3] = apontamentoModel.getJustificativa();
-            colunas[4] = apontamentoModel.getSituacao();
-
-            model.addRow(colunas);
-        }
+                    lblTotal.setText("Total: " + Integer.toString(i+1));
+                }
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(
+                        ApontamentoHistorico.class.getName()).log(
+                        Level.SEVERE,
+                        ex.getMessage(),
+                        ex);
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -92,6 +95,8 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         lblTitulo = new javax.swing.JLabel();
         scrollPanel = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        btnAtualizarTabela = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 102));
@@ -126,6 +131,29 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         tabela.setSelectionBackground(new java.awt.Color(153, 204, 255));
         tabela.setSelectionForeground(new java.awt.Color(0, 0, 102));
         scrollPanel.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setMinWidth(120);
+            tabela.getColumnModel().getColumn(1).setMinWidth(120);
+            tabela.getColumnModel().getColumn(3).setMinWidth(150);
+            tabela.getColumnModel().getColumn(4).setMinWidth(60);
+        }
+
+        btnAtualizarTabela.setBackground(new java.awt.Color(0, 51, 102));
+        btnAtualizarTabela.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizarTabela.setText("Atualizar tabela");
+        btnAtualizarTabela.setBorder(null);
+        btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarTabelaActionPerformed(evt);
+            }
+        });
+
+        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotal.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 102, 255));
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal.setText("0");
+        lblTotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,7 +165,11 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTotal)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAtualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,15 +177,34 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(18, 18, 18)
+                .addComponent(btnAtualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTotal)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
+        try {
+            popularTabela();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(
+                    ConexaoSQL.class.getName()).log(
+                    Level.SEVERE,
+                    e.getMessage(),
+                    e);
+        }
+    }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarTabela;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JScrollPane scrollPanel;
     public static javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables

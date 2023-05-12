@@ -23,6 +23,15 @@
  */
 package br.com.lacamentohoraextra;
 
+import br.com.lacamentohoraextra.Views.TelaAprovacao;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.awt.BorderLayout;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author daviramos
@@ -34,6 +43,41 @@ public class Gestor extends javax.swing.JFrame {
      */
     public Gestor() {
         initComponents();
+        init();
+    }
+
+    public void init() {
+        btnAprovacao.setSelected(false);
+        btnCliente.setSelected(false);
+        btnDashboard.setSelected(true);
+        btnLancamento.setSelected(false);
+    }
+
+    private void showApontamento(Class<?> gestorClass) {
+        try {
+            JPanel gestorPanel = (JPanel) gestorClass.getDeclaredConstructor().newInstance();
+            gestorPanel.setSize(content.getWidth(), content.getHeight());
+            gestorPanel.setLocation(0, 0);
+
+            content.removeAll();
+            content.add(gestorPanel, BorderLayout.CENTER);
+            content.revalidate();
+            content.repaint();
+        }
+        catch (InstantiationException
+                | IllegalAccessException
+                | NoSuchMethodException
+                | InvocationTargetException ex) {
+            Logger.getLogger(
+                    Gestor.class.getName()).log(
+                    Level.SEVERE,
+                    ex.getMessage(),
+                    ex);
+            JOptionPane.showMessageDialog(
+                    Gestor.this,
+                    "Database connection failed: " + ex.getMessage());
+
+        }
     }
 
     /**
@@ -47,15 +91,17 @@ public class Gestor extends javax.swing.JFrame {
 
         container = new javax.swing.JPanel();
         sidebarmenu = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnDashboard = new javax.swing.JButton();
+        btnLancamento = new javax.swing.JButton();
+        btnAprovacao = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 600));
-        setPreferredSize(new java.awt.Dimension(940, 600));
+        setName("gestorFrame"); // NOI18N
         setResizable(false);
 
         container.setBackground(new java.awt.Color(255, 255, 255));
@@ -67,26 +113,48 @@ public class Gestor extends javax.swing.JFrame {
         sidebarmenu.setBackground(new java.awt.Color(0, 51, 102));
         sidebarmenu.setForeground(new java.awt.Color(0, 51, 102));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 204, 255));
-        jButton1.setText("Dashboard");
-        jButton1.setContentAreaFilled(false);
+        btnDashboard.setBackground(new java.awt.Color(255, 255, 255));
+        btnDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnDashboard.setForeground(new java.awt.Color(153, 204, 255));
+        btnDashboard.setText("Dashboard");
+        btnDashboard.setBorder(null);
+        btnDashboard.setContentAreaFilled(false);
 
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 204, 255));
-        jButton2.setText("Lançamentos");
-        jButton2.setContentAreaFilled(false);
+        btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnLancamento.setForeground(new java.awt.Color(153, 204, 255));
+        btnLancamento.setText("Lançamentos");
+        btnLancamento.setBorder(null);
+        btnLancamento.setContentAreaFilled(false);
 
-        jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(153, 204, 255));
-        jButton3.setText("Aprovações");
-        jButton3.setContentAreaFilled(false);
+        btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
+        btnAprovacao.setText("Aprovações");
+        btnAprovacao.setBorder(null);
+        btnAprovacao.setContentAreaFilled(false);
+        btnAprovacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAprovacaoActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(153, 204, 255));
-        jButton4.setText("Clientes");
-        jButton4.setContentAreaFilled(false);
+        btnCliente.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnCliente.setForeground(new java.awt.Color(153, 204, 255));
+        btnCliente.setText("Clientes");
+        btnCliente.setBorder(null);
+        btnCliente.setContentAreaFilled(false);
+
+        btnSair.setBackground(new java.awt.Color(255, 255, 255));
+        btnSair.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(153, 204, 255));
+        btnSair.setText("Sair");
+        btnSair.setActionCommand("sair");
+        btnSair.setBorder(null);
+        btnSair.setContentAreaFilled(false);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sidebarmenuLayout = new javax.swing.GroupLayout(sidebarmenu);
         sidebarmenu.setLayout(sidebarmenuLayout);
@@ -95,24 +163,27 @@ public class Gestor extends javax.swing.JFrame {
             .addGroup(sidebarmenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(btnAprovacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidebarmenuLayout.setVerticalGroup(
             sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebarmenuLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAprovacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
@@ -123,7 +194,7 @@ public class Gestor extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 764, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +208,7 @@ public class Gestor extends javax.swing.JFrame {
             .addGroup(containerLayout.createSequentialGroup()
                 .addComponent(sidebarmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,38 +232,29 @@ public class Gestor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAprovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprovacaoActionPerformed
+        btnAprovacao.setSelected(true);
+        btnCliente.setSelected(false);
+        btnDashboard.setSelected(false);
+        btnLancamento.setSelected(false);
+        showApontamento(TelaAprovacao.class);
+    }//GEN-LAST:event_btnAprovacaoActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        }
-        catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Gestor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        FlatIntelliJLaf.registerCustomDefaultsSource("br.com.lacamentohoraextra.styles");
+        FlatIntelliJLaf.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -203,12 +265,13 @@ public class Gestor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAprovacao;
+    private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnLancamento;
+    private javax.swing.JButton btnSair;
     private javax.swing.JPanel container;
     private javax.swing.JPanel content;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel sidebarmenu;
     // End of variables declaration//GEN-END:variables
 }

@@ -71,7 +71,6 @@ public class Administrador extends javax.swing.JFrame {
         btnProjeto = new javax.swing.JButton();
         btnCliente1 = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,8 +117,6 @@ public class Administrador extends javax.swing.JFrame {
         btnSair.setText("Sair");
         btnSair.setContentAreaFilled(false);
 
-        jToggleButton1.setText("jToggleButton1");
-
         javax.swing.GroupLayout sidebarmenuLayout = new javax.swing.GroupLayout(sidebarmenu);
         sidebarmenu.setLayout(sidebarmenuLayout);
         sidebarmenuLayout.setHorizontalGroup(
@@ -134,7 +131,6 @@ public class Administrador extends javax.swing.JFrame {
                     .addComponent(btnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         sidebarmenuLayout.setVerticalGroup(
             sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +145,7 @@ public class Administrador extends javax.swing.JFrame {
                 .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -229,7 +223,6 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JPanel container;
     private javax.swing.JPanel content;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.ButtonGroup sidebarBtnGroup;
     private javax.swing.JPanel sidebarmenu;
     // End of variables declaration//GEN-END:variables

@@ -221,7 +221,7 @@ public final class Colaborador extends javax.swing.JFrame {
                 | NoSuchMethodException 
                 | InvocationTargetException ex) {
             Logger.getLogger(
-                    Administrador.class.getName()).log(
+                    Colaborador.class.getName()).log(
                     Level.SEVERE,
                     ex.getMessage(),
                     ex);
