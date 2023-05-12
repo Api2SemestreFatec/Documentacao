@@ -4,6 +4,8 @@
  */
 package br.com.lacamentohoraextra;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
+
 /**
  *
  * @author daviramos
@@ -26,12 +28,17 @@ public class Administrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        sidebarBtnGroup = new javax.swing.ButtonGroup();
+        container = new javax.swing.JPanel();
+        sidebarmenu = new javax.swing.JPanel();
+        btnDashboard = new javax.swing.JButton();
+        btnLancamento = new javax.swing.JButton();
+        btnAprovacao = new javax.swing.JButton();
+        btnProjeto = new javax.swing.JButton();
+        btnCliente1 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -40,82 +47,124 @@ public class Administrador extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(940, 600));
         setName("mainframe"); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(234, 238, 243));
+        container.setBackground(new java.awt.Color(234, 238, 243));
+        container.setMinimumSize(new java.awt.Dimension(940, 600));
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
-        jPanel2.setForeground(new java.awt.Color(0, 51, 102));
+        sidebarmenu.setBackground(new java.awt.Color(0, 51, 102));
+        sidebarmenu.setForeground(new java.awt.Color(0, 51, 102));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 204, 255));
-        jButton1.setText("Dashboard");
-        jButton1.setContentAreaFilled(false);
+        btnDashboard.setBackground(new java.awt.Color(255, 255, 255));
+        btnDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnDashboard.setForeground(new java.awt.Color(153, 204, 255));
+        btnDashboard.setText("Dashboard");
+        btnDashboard.setContentAreaFilled(false);
 
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 204, 255));
-        jButton2.setText("Lançamentos");
-        jButton2.setContentAreaFilled(false);
+        btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnLancamento.setForeground(new java.awt.Color(153, 204, 255));
+        btnLancamento.setText("Lançamentos");
+        btnLancamento.setContentAreaFilled(false);
 
-        jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(153, 204, 255));
-        jButton3.setText("Aprovações");
-        jButton3.setContentAreaFilled(false);
+        btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
+        btnAprovacao.setText("Aprovações");
+        btnAprovacao.setContentAreaFilled(false);
 
-        jButton4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(153, 204, 255));
-        jButton4.setText("Clientes");
-        jButton4.setContentAreaFilled(false);
+        btnProjeto.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnProjeto.setForeground(new java.awt.Color(153, 204, 255));
+        btnProjeto.setText("Projetos");
+        btnProjeto.setContentAreaFilled(false);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        btnCliente1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnCliente1.setForeground(new java.awt.Color(153, 204, 255));
+        btnCliente1.setText("Clientes");
+        btnCliente1.setContentAreaFilled(false);
+
+        btnSair.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(153, 204, 255));
+        btnSair.setText("Sair");
+        btnSair.setContentAreaFilled(false);
+
+        jToggleButton1.setText("jToggleButton1");
+
+        javax.swing.GroupLayout sidebarmenuLayout = new javax.swing.GroupLayout(sidebarmenu);
+        sidebarmenu.setLayout(sidebarmenuLayout);
+        sidebarmenuLayout.setHorizontalGroup(
+            sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidebarmenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(btnAprovacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProjeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        sidebarmenuLayout.setVerticalGroup(
+            sidebarmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidebarmenuLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAprovacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+
+        content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setForeground(new java.awt.Color(0, 51, 102));
+        content.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        content.setMinimumSize(new java.awt.Dimension(764, 600));
+        content.setPreferredSize(new java.awt.Dimension(764, 600));
+
+        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
+        content.setLayout(contentLayout);
+        contentLayout.setHorizontalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 764, Short.MAX_VALUE)
+        );
+        contentLayout.setVerticalGroup(
+            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
+        container.setLayout(containerLayout);
+        containerLayout.setHorizontalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(containerLayout.createSequentialGroup()
+                .addComponent(sidebarmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 537, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        containerLayout.setVerticalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sidebarmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -127,30 +176,22 @@ public class Administrador extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
+        
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        }
+//        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+        FlatIntelliJLaf.registerCustomDefaultsSource("br.com.lacamentohoraextra.styles");
+        FlatIntelliJLaf.setup();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -158,13 +199,17 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btnAprovacao;
+    private javax.swing.JButton btnCliente1;
+    private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnLancamento;
+    private javax.swing.JButton btnProjeto;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JPanel container;
+    private javax.swing.JPanel content;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.ButtonGroup sidebarBtnGroup;
+    private javax.swing.JPanel sidebarmenu;
     // End of variables declaration//GEN-END:variables
 }

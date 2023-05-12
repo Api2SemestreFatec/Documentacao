@@ -50,7 +50,7 @@ public class ApontamentoDAO {
             ResultSet resultSet;
 
             try {
-                String query = "SELECT * FROM apontamento";
+                String query = "SELECT data_apontamento, hora_apontamento, cliente_projeto, justificativa, situacao FROM public.vw_apontamento";
                 consultaSQL = connection.prepareStatement(query);
 
                 resultSet = consultaSQL.executeQuery();
@@ -58,11 +58,9 @@ public class ApontamentoDAO {
                 while (resultSet.next()) {
                     ApontamentoModel apontamentoModel = new ApontamentoModel();
 
-                    apontamentoModel.setDataApontamento(resultSet.getString("data_apontamento"));
-                    apontamentoModel.setHoraInicio(resultSet.getString("hora_inicio"));
-                    apontamentoModel.setHoraFinal(resultSet.getString("hora_fim"));
-                    apontamentoModel.setProjeto(resultSet.getString("projeto"));
-                    apontamentoModel.setSolicitante(resultSet.getString("solicitante"));
+                    apontamentoModel.setData_apontamento(resultSet.getString("data_apontamento"));
+                    apontamentoModel.setHora_apontamento(resultSet.getString("hora_apontamento"));
+                    apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
                     apontamentoModel.setJustificativa(resultSet.getString("justificativa"));
                     apontamentoModel.setSituacao(resultSet.getString("situacao"));
 
@@ -77,9 +75,68 @@ public class ApontamentoDAO {
                         e);
             }
             finally {
-                connection.close();
+                if (connection != null) {
+                    connection.close();
+                }
             }
         }
         return listaDeApontamento;
+    }
+
+    public void cadastrarApontamento(ApontamentoModel apontamento) {
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            String query = "INSERT INTO apontamentos (data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement consultaSQL = null;
+
+            try {
+                consultaSQL = connection.prepareStatement(query);
+
+                consultaSQL.setString(1, apontamento.getDataInicialApontamento()); //colocar data inicial
+                consultaSQL.setString(2, apontamento.getDataFinalApontamento()); //colocar data final ( ta dando erro pq ainda n foi criado a data final)
+                consultaSQL.setString(3, apontamento.getHoraInicio()); // hora inicial
+                consultaSQL.setString(4, apontamento.getHoraFinal()); // hora final
+                consultaSQL.setString(5, apontamento.getSolicitante()); // nome do cliente
+                consultaSQL.setString(6, apontamento.getProjeto()); // nome do projeto
+                consultaSQL.setString(7, apontamento.getJustificativa()); // justificativa
+
+                consultaSQL.execute();
+            }
+            catch (SQLException e) {
+                Logger.getLogger(
+                        ConexaoSQL.class.getName()).log(
+                        Level.SEVERE,
+                        e.getMessage(),
+                        e);
+            }
+            finally {
+                try {
+                    if (consultaSQL != null) {
+                        consultaSQL.close();
+                    }
+                }
+                catch (SQLException e) {
+                    Logger.getLogger(
+                            ConexaoSQL.class.getName()).log(
+                            Level.SEVERE,
+                            e.getMessage(),
+                            e);
+                }
+
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                }
+                catch (SQLException e) {
+                    Logger.getLogger(
+                            ConexaoSQL.class.getName()).log(
+                            Level.SEVERE,
+                            e.getMessage(),
+                            e);
+                }
+            }
+        }
     }
 }

@@ -23,39 +23,68 @@
  */
 package br.com.lacamentohoraextra.Models;
 
+import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+
 /**
  *
  * @author daviramos
  */
 public class ApontamentoModel {
 
-    private String dataApontamento;
+    private String dataInicialApontamento;
+    private String dataFinalApontamento;
+    private String data_apontamento;
     private String horaInicio;
     private String horaFinal;
+    private String hora_apontamento;
     private String projeto;
     private String solicitante;
+    private String cliente_projeto;
     private String justificativa;
     private String situacao;
 
     public ApontamentoModel() {
     }
 
-    public ApontamentoModel(String dataApontamento, String horaInicio, String horaFinal, String projeto, String solicitante, String justificativa, String situacao) {
-        this.dataApontamento = dataApontamento;
+    public ApontamentoModel(
+            String dataInicialApontamento,
+            String dataFinalApontamento,
+            String data_apontamento,
+            String horaInicio,
+            String horaFinal,
+            String hora_apontamento,
+            String projeto,
+            String solicitante,
+            String cliente_projeto,
+            String justificativa,
+            String situacao) {
+        this.dataInicialApontamento = dataInicialApontamento;
+        this.dataFinalApontamento = dataFinalApontamento;
+        this.data_apontamento = data_apontamento;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
+        this.hora_apontamento = hora_apontamento;
         this.projeto = projeto;
         this.solicitante = solicitante;
+        this.cliente_projeto = cliente_projeto;
         this.justificativa = justificativa;
         this.situacao = situacao;
     }
 
-    public String getDataApontamento() {
-        return dataApontamento;
+    public String getDataInicialApontamento() {
+        return dataInicialApontamento;
     }
 
-    public void setDataApontamento(String dataApontamento) {
-        this.dataApontamento = dataApontamento;
+    public void setDataInicialApontamento(String dataInicialApontamento) {
+        this.dataInicialApontamento = dataInicialApontamento;
+    }
+
+    public String getDataFinalApontamento() {
+        return dataFinalApontamento;
+    }
+
+    public void setDataFinalApontamento(String dataFinalApontamento) {
+        this.dataFinalApontamento = dataFinalApontamento;
     }
 
     public String getHoraInicio() {
@@ -104,5 +133,33 @@ public class ApontamentoModel {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public String getData_apontamento() {
+        return data_apontamento;
+    }
+
+    public void setData_apontamento(String data_apontamento) {
+        this.data_apontamento = data_apontamento;
+    }
+
+    public String getHora_apontamento() {
+        return hora_apontamento;
+    }
+
+    public void setHora_apontamento(String hora_apontamento) {
+        this.hora_apontamento = hora_apontamento;
+    }
+
+    public String getCliente_projeto() {
+        return cliente_projeto;
+    }
+
+    public void setCliente_projeto(String cliente_projeto) {
+        this.cliente_projeto = cliente_projeto;
+    }
+    
+    public void cadastarHoraExtra(ApontamentoModel apontamento) {
+        new ApontamentoDAO().cadastrarApontamento(apontamento);
     }
 }

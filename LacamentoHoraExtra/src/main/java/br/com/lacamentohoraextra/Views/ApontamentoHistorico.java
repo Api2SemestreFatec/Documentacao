@@ -26,17 +26,10 @@ package br.com.lacamentohoraextra.Views;
 import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
 import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.Models.ApontamentoModel;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -50,40 +43,39 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
      */
     public ApontamentoHistorico() {
         initComponents();
-        
+
         try {
             popularTabela();
-        } catch(SQLException e){
+        }
+        catch (SQLException e) {
             Logger.getLogger(
                     ConexaoSQL.class.getName()).log(
-                            Level.SEVERE, 
-                            e.getMessage(), 
-                            e);
+                    Level.SEVERE,
+                    e.getMessage(),
+                    e);
         }
     }
-    
+
     public static void popularTabela() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setNumRows(0);
-        
-        Object colunas[] = new Object[7];
+
+        Object colunas[] = new Object[5];
         ApontamentoModel apontamentoModel = new ApontamentoModel();
-        
+
         ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
-        
+
         listaDeApontamentos = ApontamentoDAO.listarApontamentosColaborador();
-        
-        for(int i = 0; i < listaDeApontamentos.size(); i++) {
+
+        for (int i = 0; i < listaDeApontamentos.size(); i++) {
             apontamentoModel = listaDeApontamentos.get(i);
-            
-            colunas[0] = apontamentoModel.getDataApontamento();
-            colunas[1] = apontamentoModel.getHoraInicio();
-            colunas[2] = apontamentoModel.getHoraFinal();
-            colunas[3] = apontamentoModel.getProjeto();
-            colunas[4] = apontamentoModel.getSolicitante();
-            colunas[5] = apontamentoModel.getJustificativa();
-            colunas[6] = apontamentoModel.getSituacao();
-            
+
+            colunas[0] = apontamentoModel.getData_apontamento();
+            colunas[1] = apontamentoModel.getHora_apontamento();
+            colunas[2] = apontamentoModel.getCliente_projeto();
+            colunas[3] = apontamentoModel.getJustificativa();
+            colunas[4] = apontamentoModel.getSituacao();
+
             model.addRow(colunas);
         }
     }
@@ -116,14 +108,14 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         tabela.setForeground(new java.awt.Color(0, 0, 102));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Data do apontamento", "Hora inicial", "Hora final", "Projeto", "Solicitante", "Justificativa", "Situação"
+                "Data do apontamento", "Hora do apontamento", "Cliente e Projeto", "Justificativa", "Situação"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

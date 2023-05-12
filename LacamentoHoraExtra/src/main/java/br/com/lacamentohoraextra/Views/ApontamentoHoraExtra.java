@@ -23,6 +23,16 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+import br.com.lacamentohoraextra.DAO.ConexaoSQL;
+import br.com.lacamentohoraextra.utils.LimitarDocumento;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daviramos
@@ -34,6 +44,128 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
      */
     public ApontamentoHoraExtra() {
         initComponents();
+        init();
+    }
+
+    private void init() {
+        int limiteCaracteresData = 10;
+        int limiteCaracteresHora = 5;
+        int limiteCaracteresNomeCliente = 100;
+        int limiteCaracteresMotivo = 200;
+        txtDataInicial.setDocument(new LimitarDocumento(limiteCaracteresData));
+        txtDataFinal.setDocument(new LimitarDocumento(limiteCaracteresData));
+        txtHoraInicial.setDocument(new LimitarDocumento(limiteCaracteresHora));
+        txtHoraFinal.setDocument(new LimitarDocumento(limiteCaracteresHora));
+        txtCliente.setDocument(new LimitarDocumento(limiteCaracteresNomeCliente));
+        txtProjeto.setDocument(new LimitarDocumento(limiteCaracteresNomeCliente));
+        txaJustificativa.setDocument(new LimitarDocumento(limiteCaracteresMotivo));
+
+        btnEnviar.addActionListener(e -> {
+            String dataHorasExtras = txtDataInicial.getText();
+            String dataFinal = txtDataFinal.getText();
+            String horaInicio = txtHoraInicial.getText();
+            String horaFim = txtHoraFinal.getText();
+            String nomeCliente = txtCliente.getText();
+            String nomeProjeto = txtProjeto.getText();
+            String motivoHorasExtras = txaJustificativa.getText();
+
+            if (dataHorasExtras.length() < 10) {
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Data inicial deve ser preenchida conforme exemplo.");
+                return;
+            }
+            if (dataFinal.length() < 10) {
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Data final deve ser preenchida conforme exemplo.");
+                return;
+            }
+
+            if (horaInicio.length() < 5) {
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Horario inicial deve ser preenchido conforme exemplo.");
+                return;
+            }
+            if (horaFim.length() < 5) {
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Horario final deve ser preenchido conforme exemplo.");
+                return;
+            }
+
+            // Verifica se algum campo está em branco
+            if (dataHorasExtras.isEmpty()
+                    || dataFinal.isEmpty()
+                    || horaInicio.isEmpty()
+                    || horaFim.isEmpty()
+                    || nomeCliente.isEmpty()
+                    || nomeProjeto.isEmpty()
+                    || motivoHorasExtras.isEmpty()) {
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Por favor, preencha todos os campos antes de lançar as horas extras.");
+            } else {
+                // Reseta os campos de texto e área de texto para novo preenchimento
+                txtDataInicial.setText("");
+                txtDataFinal.setText("");
+                txtHoraInicial.setText("");
+                txtHoraFinal.setText("");
+                txtCliente.setText("");
+                txtProjeto.setText("");
+                txaJustificativa.setText("");
+
+                Connection connection = ConexaoSQL.iniciarConexao();
+
+                if (ConexaoSQL.status == true) {
+                    String query = "INSERT INTO apontamentos (data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement consultaSQL = null;
+
+                    try {
+                        consultaSQL = connection.prepareStatement(query);
+
+                        consultaSQL.setString(1, dataHorasExtras); //colocar data inicial
+                        consultaSQL.setString(2, dataFinal); //colocar data final ( ta dando erro pq ainda n foi criado a data final)
+                        consultaSQL.setString(3, horaInicio); // hora inicial
+                        consultaSQL.setString(4, horaFim); // hora final
+                        consultaSQL.setString(5, nomeCliente); // nome do cliente
+                        consultaSQL.setString(6, nomeProjeto); // nome do projeto
+                        consultaSQL.setString(7, motivoHorasExtras); // justificativa
+
+                        consultaSQL.execute();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(
+                                ConexaoSQL.class.getName()).log(
+                                Level.SEVERE,
+                                ex.getMessage(),
+                                ex);
+                    } finally {
+                        try {
+                            if (consultaSQL != null) {
+                                consultaSQL.close();
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(
+                                    ConexaoSQL.class.getName()).log(
+                                    Level.SEVERE,
+                                    ex.getMessage(),
+                                    ex);
+                        }
+
+                        try {
+                            if (connection != null) {
+                                connection.close();
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(
+                                    ConexaoSQL.class.getName()).log(
+                                    Level.SEVERE,
+                                    ex.getMessage(),
+                                    ex);
+                        }
+                    }
+                }
+
+                JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
+                        "Horas extras lançadas com sucesso!");
+            }
+        });
     }
 
     /**
@@ -46,15 +178,15 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
+        txtDataInicial = new javax.swing.JTextField();
+        txtDataFinal = new javax.swing.JTextField();
+        txtHoraInicial = new javax.swing.JTextField();
+        txtHoraFinal = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
+        txtProjeto = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        username = new javax.swing.JTextField();
-        username1 = new javax.swing.JTextField();
-        username2 = new javax.swing.JTextField();
-        username3 = new javax.swing.JTextField();
-        username4 = new javax.swing.JTextField();
-        username5 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        scpJustificativa = new javax.swing.JScrollPane();
+        txaJustificativa = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 51, 102));
@@ -67,6 +199,48 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Apontamento");
 
+        txtDataInicial.setBackground(new java.awt.Color(255, 255, 255));
+        txtDataInicial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtDataInicial.setForeground(new java.awt.Color(0, 51, 102));
+        txtDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Data inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtDataInicial.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtDataInicial.setName("txtDataInicial"); // NOI18N
+
+        txtDataFinal.setBackground(new java.awt.Color(255, 255, 255));
+        txtDataFinal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtDataFinal.setForeground(new java.awt.Color(0, 51, 102));
+        txtDataFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Data final", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtDataFinal.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtDataFinal.setName("username"); // NOI18N
+
+        txtHoraInicial.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraInicial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtHoraInicial.setForeground(new java.awt.Color(0, 51, 102));
+        txtHoraInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtHoraInicial.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtHoraInicial.setName("username"); // NOI18N
+
+        txtHoraFinal.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraFinal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtHoraFinal.setForeground(new java.awt.Color(0, 51, 102));
+        txtHoraFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora final", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtHoraFinal.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtHoraFinal.setName("username"); // NOI18N
+
+        txtCliente.setBackground(new java.awt.Color(255, 255, 255));
+        txtCliente.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtCliente.setForeground(new java.awt.Color(0, 51, 102));
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtCliente.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtCliente.setName("username"); // NOI18N
+
+        txtProjeto.setBackground(new java.awt.Color(255, 255, 255));
+        txtProjeto.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtProjeto.setForeground(new java.awt.Color(0, 51, 102));
+        txtProjeto.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Projeto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txtProjeto.setDisabledTextColor(new java.awt.Color(0, 0, 102));
+        txtProjeto.setName("username"); // NOI18N
+
         btnEnviar.setBackground(new java.awt.Color(0, 51, 102));
         btnEnviar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,60 +249,13 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
         btnEnviar.setBorderPainted(false);
         btnEnviar.setName("enviar"); // NOI18N
 
-        username.setBackground(new java.awt.Color(255, 255, 255));
-        username.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username.setForeground(new java.awt.Color(0, 51, 102));
-        username.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Data inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username.setName("username"); // NOI18N
-
-        username1.setBackground(new java.awt.Color(255, 255, 255));
-        username1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username1.setForeground(new java.awt.Color(0, 51, 102));
-        username1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username1.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username1.setName("username"); // NOI18N
-
-        username2.setBackground(new java.awt.Color(255, 255, 255));
-        username2.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username2.setForeground(new java.awt.Color(0, 51, 102));
-        username2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username2.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username2.setName("username"); // NOI18N
-
-        username3.setBackground(new java.awt.Color(255, 255, 255));
-        username3.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username3.setForeground(new java.awt.Color(0, 51, 102));
-        username3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Data final", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username3.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username3.setName("username"); // NOI18N
-        username3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username3ActionPerformed(evt);
-            }
-        });
-
-        username4.setBackground(new java.awt.Color(255, 255, 255));
-        username4.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username4.setForeground(new java.awt.Color(0, 51, 102));
-        username4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora final", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username4.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username4.setName("username"); // NOI18N
-
-        username5.setBackground(new java.awt.Color(255, 255, 255));
-        username5.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        username5.setForeground(new java.awt.Color(0, 51, 102));
-        username5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Projeto", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        username5.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        username5.setName("username"); // NOI18N
-
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 102));
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "Justificativa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        jTextArea1.setCaretColor(new java.awt.Color(0, 51, 102));
-        jScrollPane1.setViewportView(jTextArea1);
+        txaJustificativa.setBackground(new java.awt.Color(255, 255, 255));
+        txaJustificativa.setColumns(20);
+        txaJustificativa.setForeground(new java.awt.Color(0, 0, 102));
+        txaJustificativa.setRows(5);
+        txaJustificativa.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "Justificativa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
+        txaJustificativa.setCaretColor(new java.awt.Color(0, 51, 102));
+        scpJustificativa.setViewportView(txaJustificativa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,18 +272,18 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                             .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(username1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(username2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
-                                            .addComponent(username4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
-                                        .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING)))
+                                            .addComponent(txtHoraFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                                        .addComponent(txtDataInicial, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(username3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(username5, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(scpJustificativa, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -167,39 +294,35 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scpJustificativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void username3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField username;
-    private javax.swing.JTextField username1;
-    private javax.swing.JTextField username2;
-    private javax.swing.JTextField username3;
-    private javax.swing.JTextField username4;
-    private javax.swing.JTextField username5;
+    private javax.swing.JScrollPane scpJustificativa;
+    private javax.swing.JTextArea txaJustificativa;
+    private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtDataFinal;
+    private javax.swing.JTextField txtDataInicial;
+    private javax.swing.JTextField txtHoraFinal;
+    private javax.swing.JTextField txtHoraInicial;
+    private javax.swing.JTextField txtProjeto;
     // End of variables declaration//GEN-END:variables
 }
