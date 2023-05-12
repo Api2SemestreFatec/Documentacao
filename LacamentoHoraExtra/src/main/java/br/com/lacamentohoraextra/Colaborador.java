@@ -23,7 +23,6 @@
  */
 package br.com.lacamentohoraextra;
 
-import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.Views.ApontamentoHistorico;
 import br.com.lacamentohoraextra.Views.ApontamentoHoraExtra;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -217,13 +216,18 @@ public final class Colaborador extends javax.swing.JFrame {
             content.revalidate();
             content.repaint();
         }
-        catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
+        catch (InstantiationException 
+                | IllegalAccessException 
+                | NoSuchMethodException 
+                | InvocationTargetException ex) {
             Logger.getLogger(
-                    ConexaoSQL.class.getName()).log(
+                    Administrador.class.getName()).log(
                     Level.SEVERE,
                     ex.getMessage(),
                     ex);
-            JOptionPane.showMessageDialog(Colaborador.this, "Database connection failed: " + ex.getMessage());
+            JOptionPane.showMessageDialog(
+                    Colaborador.this, 
+                    "Database connection failed: " + ex.getMessage());
 
         }
     }

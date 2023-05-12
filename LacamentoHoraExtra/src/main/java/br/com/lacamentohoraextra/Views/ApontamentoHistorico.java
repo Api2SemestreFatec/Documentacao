@@ -97,6 +97,7 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         setForeground(new java.awt.Color(0, 0, 102));
         setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(764, 600));
+        setName(""); // NOI18N
 
         lblTitulo.setBackground(new java.awt.Color(255, 255, 255));
         lblTitulo.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N

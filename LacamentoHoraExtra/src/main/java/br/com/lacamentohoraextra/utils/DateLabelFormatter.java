@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package br.com.lacamentohoraextra.Views;
+package br.com.lacamentohoraextra.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

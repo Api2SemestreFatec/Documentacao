@@ -4,7 +4,14 @@
  */
 package br.com.lacamentohoraextra;
 
+import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.awt.BorderLayout;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,6 +24,33 @@ public class Administrador extends javax.swing.JFrame {
      */
     public Administrador() {
         initComponents();
+    }
+
+    private void showApontamento(Class<?> apontamentoClass) {
+        try {
+            JPanel apontamentoPanel = (JPanel) apontamentoClass.getDeclaredConstructor().newInstance();
+            apontamentoPanel.setSize(content.getWidth(), content.getHeight());
+            apontamentoPanel.setLocation(0, 0);
+
+            content.removeAll();
+            content.add(apontamentoPanel, BorderLayout.CENTER);
+            content.revalidate();
+            content.repaint();
+        }
+        catch (InstantiationException
+                | IllegalAccessException
+                | NoSuchMethodException
+                | InvocationTargetException ex) {
+            Logger.getLogger(
+                    Administrador.class.getName()).log(
+                    Level.SEVERE,
+                    ex.getMessage(),
+                    ex);
+            JOptionPane.showMessageDialog(
+                    Administrador.this,
+                    "Database connection failed: " + ex.getMessage());
+
+        }
     }
 
     /**
@@ -176,22 +210,9 @@ public class Administrador extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        }
-//        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
         FlatIntelliJLaf.registerCustomDefaultsSource("br.com.lacamentohoraextra.styles");
         FlatIntelliJLaf.setup();
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
