@@ -51,8 +51,8 @@ public class ApontamentoDAO {
             ResultSet resultSet;
 
             try {
-                String query = "SELECT data_apontamento, hora_apontamento, cliente_projeto, justificativa, situacao "
-                        + "FROM public.vw_apontamento WHERE id_usuario = ?";
+                String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, situacao"
+                        + " FROM public.vw_colaborador_apontamentos WHERE id_usuario = ?";
                 consultaSQL = connection.prepareStatement(query);
                 consultaSQL.setInt(1, Globals.getUserID());
 
@@ -61,11 +61,57 @@ public class ApontamentoDAO {
                 while (resultSet.next()) {
                     ApontamentoModel apontamentoModel = new ApontamentoModel();
 
-                    apontamentoModel.setData_apontamento(resultSet.getString("data_apontamento"));
-                    apontamentoModel.setHora_apontamento(resultSet.getString("hora_apontamento"));
                     apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
+                    apontamentoModel.setDataInicialApontamento(resultSet.getString("datahora_inicio"));
+                    apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_fim"));
+                    apontamentoModel.setIntervalo(resultSet.getString("intervalo"));
                     apontamentoModel.setJustificativa(resultSet.getString("justificativa"));
                     apontamentoModel.setSituacao(resultSet.getString("situacao"));
+
+                    listaDeApontamento.add(apontamentoModel);
+                }
+            }
+            catch (SQLException e) {
+                Logger.getLogger(
+                        ConexaoSQL.class.getName()).log(
+                        Level.SEVERE,
+                        e.getMessage(),
+                        e);
+            }
+            finally {
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+        }
+        return listaDeApontamento;
+    }
+
+    public static ArrayList<ApontamentoModel> listarApontamentosGestor() throws SQLException {
+        ArrayList<ApontamentoModel> listaDeApontamento = new ArrayList<>();
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            PreparedStatement consultaSQL;
+            ResultSet resultSet;
+
+            try {
+                String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario"
+                        + " FROM public.vw_colaborador_apontamentos "
+                        + " WHERE ";
+
+                consultaSQL = connection.prepareStatement(query);
+                resultSet = consultaSQL.executeQuery();
+
+                while (resultSet.next()) {
+                    ApontamentoModel apontamentoModel = new ApontamentoModel();
+
+                    apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
+                    apontamentoModel.setDataInicialApontamento(resultSet.getString("datahora_inicio"));
+                    apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_inicio"));
+                    apontamentoModel.setIntervalo(resultSet.getString("intervalo"));
+                    apontamentoModel.setJustificativa(resultSet.getString("justificativa"));
+                    apontamentoModel.setSituacao(resultSet.getString("nome_usuario"));
 
                     listaDeApontamento.add(apontamentoModel);
                 }

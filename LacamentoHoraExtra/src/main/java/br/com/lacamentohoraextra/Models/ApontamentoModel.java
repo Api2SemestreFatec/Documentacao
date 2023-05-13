@@ -40,24 +40,14 @@ public class ApontamentoModel {
     private String projeto;
     private String solicitante;
     private String cliente_projeto;
+    private String intervalo;
     private String justificativa;
     private String situacao;
 
     public ApontamentoModel() {
     }
 
-    public ApontamentoModel(
-            String dataInicialApontamento,
-            String dataFinalApontamento,
-            String data_apontamento,
-            String horaInicio,
-            String horaFinal,
-            String hora_apontamento,
-            String projeto,
-            String solicitante,
-            String cliente_projeto,
-            String justificativa,
-            String situacao) {
+    public ApontamentoModel(String dataInicialApontamento, String dataFinalApontamento, String data_apontamento, String horaInicio, String horaFinal, String hora_apontamento, String projeto, String solicitante, String cliente_projeto, String intervalo, String justificativa, String situacao) {
         this.dataInicialApontamento = dataInicialApontamento;
         this.dataFinalApontamento = dataFinalApontamento;
         this.data_apontamento = data_apontamento;
@@ -67,8 +57,17 @@ public class ApontamentoModel {
         this.projeto = projeto;
         this.solicitante = solicitante;
         this.cliente_projeto = cliente_projeto;
+        this.intervalo = intervalo;
         this.justificativa = justificativa;
         this.situacao = situacao;
+    }
+
+    public String getIntervalo() {
+        return intervalo;
+    }
+
+    public void setIntervalo(String intervalo) {
+        this.intervalo = intervalo;
     }
 
     public String getDataInicialApontamento() {

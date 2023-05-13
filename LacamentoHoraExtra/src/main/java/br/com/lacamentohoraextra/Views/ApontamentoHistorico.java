@@ -52,7 +52,7 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
 
         Thread thread = new Thread(() -> {
             try {
-                Object colunas[] = new Object[5];
+                Object colunas[] = new Object[6];
                 ApontamentoModel apontamentoModel = new ApontamentoModel();
 
                 ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
@@ -61,15 +61,16 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
                 for (int i = 0; i < listaDeApontamentos.size(); i++) {
                     apontamentoModel = listaDeApontamentos.get(i);
 
-                    colunas[0] = apontamentoModel.getData_apontamento();
-                    colunas[1] = apontamentoModel.getHora_apontamento();
-                    colunas[2] = apontamentoModel.getCliente_projeto();
-                    colunas[3] = apontamentoModel.getJustificativa();
-                    colunas[4] = apontamentoModel.getSituacao();
+                    colunas[0] = apontamentoModel.getCliente_projeto();
+                    colunas[1] = apontamentoModel.getDataInicialApontamento();
+                    colunas[2] = apontamentoModel.getDataFinalApontamento();
+                    colunas[3] = apontamentoModel.getIntervalo();
+                    colunas[4] = apontamentoModel.getJustificativa();
+                    colunas[5] = apontamentoModel.getSituacao();
 
                     model.addRow(colunas);
 
-                    lblTotal.setText("Total: " + Integer.toString(i+1));
+                    lblTotal.setText("Total: " + listaDeApontamentos.size());
                 }
             }
             catch (SQLException ex) {
@@ -117,11 +118,11 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Data do apontamento", "Hora do apontamento", "Cliente e Projeto", "Justificativa", "Situação"
+                "Cliente e Projeto", "Data do apontamento", "Hora do apontamento", "Total de horas", "Justificativa", "Situação"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -132,10 +133,10 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         tabela.setSelectionForeground(new java.awt.Color(0, 0, 102));
         scrollPanel.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
-            tabela.getColumnModel().getColumn(0).setMinWidth(120);
             tabela.getColumnModel().getColumn(1).setMinWidth(120);
-            tabela.getColumnModel().getColumn(3).setMinWidth(150);
-            tabela.getColumnModel().getColumn(4).setMinWidth(60);
+            tabela.getColumnModel().getColumn(2).setMinWidth(120);
+            tabela.getColumnModel().getColumn(4).setMinWidth(150);
+            tabela.getColumnModel().getColumn(5).setMinWidth(50);
         }
 
         btnAtualizarTabela.setBackground(new java.awt.Color(0, 51, 102));

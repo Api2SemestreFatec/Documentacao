@@ -97,16 +97,22 @@
               <Color blue="66" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
+              <Table columnCount="6" rowCount="0">
+                <Column editable="true" title="Cliente e Projeto" type="java.lang.String"/>
                 <Column editable="true" title="Data do apontamento" type="java.lang.String"/>
                 <Column editable="true" title="Hora do apontamento" type="java.lang.String"/>
-                <Column editable="true" title="Cliente e Projeto" type="java.lang.String"/>
+                <Column editable="true" title="Total de horas" type="java.lang.String"/>
                 <Column editable="true" title="Justificativa" type="java.lang.String"/>
                 <Column editable="true" title="Situa&#xe7;&#xe3;o" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="120" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -127,7 +133,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="60" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="50" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

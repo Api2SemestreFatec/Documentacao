@@ -72,23 +72,23 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
 
             if (dataHorasExtras.length() < 10) {
                 JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
-                        "Data inicial deve ser preenchida conforme exemplo.");
+                        "Data inicial deve ser preenchida conforme exemplo: 01-01-1900.");
                 return;
             }
             if (dataFinal.length() < 10) {
                 JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
-                        "Data final deve ser preenchida conforme exemplo.");
+                        "Data final deve ser preenchida conforme exemplo: 01-01-1900.");
                 return;
             }
 
             if (horaInicio.length() < 5) {
                 JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
-                        "Horario inicial deve ser preenchido conforme exemplo.");
+                        "Horario inicial deve ser preenchido conforme exemplo: 00:00." + horaInicio.length());
                 return;
             }
             if (horaFim.length() < 5) {
                 JOptionPane.showMessageDialog(ApontamentoHoraExtra.this,
-                        "Horario final deve ser preenchido conforme exemplo.");
+                        "Horario final deve ser preenchido conforme exemplo: 00:00.");
                 return;
             }
 
@@ -117,7 +117,7 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                 if (ConexaoSQL.status == true) {
                     String query = "INSERT INTO apontamentos "
                             + "(data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa, id_usuario) "
-                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                            + "VALUES (TO_DATE(?,'DD-MM-YYYY'), TO_DATE(?,'DD-MM-YYYY'), to_timestamp(?, 'HH24:MI:SS')::TIME, to_timestamp(?, 'HH24:MI:SS')::TIME, ?, ?, ?, ?)";
                     PreparedStatement consultaSQL = null;
 
                     try {
