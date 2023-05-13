@@ -24,6 +24,7 @@
 package br.com.lacamentohoraextra.DAO;
 
 import br.com.lacamentohoraextra.Models.ApontamentoModel;
+import br.com.lacamentohoraextra.utils.Globals;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -50,8 +51,10 @@ public class ApontamentoDAO {
             ResultSet resultSet;
 
             try {
-                String query = "SELECT data_apontamento, hora_apontamento, cliente_projeto, justificativa, situacao FROM public.vw_apontamento";
+                String query = "SELECT data_apontamento, hora_apontamento, cliente_projeto, justificativa, situacao "
+                        + "FROM public.vw_apontamento WHERE id_usuario = ?";
                 consultaSQL = connection.prepareStatement(query);
+                consultaSQL.setInt(1, Globals.getUserID());
 
                 resultSet = consultaSQL.executeQuery();
 

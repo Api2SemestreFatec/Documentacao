@@ -23,12 +23,13 @@
  */
 package br.com.lacamentohoraextra.Views;
 
-import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
 import br.com.lacamentohoraextra.DAO.ConexaoSQL;
+import br.com.lacamentohoraextra.utils.Globals;
 import br.com.lacamentohoraextra.utils.LimitarDocumento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -114,7 +115,9 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                 Connection connection = ConexaoSQL.iniciarConexao();
 
                 if (ConexaoSQL.status == true) {
-                    String query = "INSERT INTO apontamentos (data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String query = "INSERT INTO apontamentos "
+                            + "(data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa, id_usuario) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement consultaSQL = null;
 
                     try {
@@ -127,20 +130,24 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                         consultaSQL.setString(5, nomeCliente); // nome do cliente
                         consultaSQL.setString(6, nomeProjeto); // nome do projeto
                         consultaSQL.setString(7, motivoHorasExtras); // justificativa
+                        consultaSQL.setInt(8, Globals.getUserID()); // ID do usuario logado
 
                         consultaSQL.execute();
-                    } catch (SQLException ex) {
+                    }
+                    catch (SQLException ex) {
                         Logger.getLogger(
                                 ConexaoSQL.class.getName()).log(
                                 Level.SEVERE,
                                 ex.getMessage(),
                                 ex);
-                    } finally {
+                    }
+                    finally {
                         try {
                             if (consultaSQL != null) {
                                 consultaSQL.close();
                             }
-                        } catch (SQLException ex) {
+                        }
+                        catch (SQLException ex) {
                             Logger.getLogger(
                                     ConexaoSQL.class.getName()).log(
                                     Level.SEVERE,
@@ -152,7 +159,8 @@ public class ApontamentoHoraExtra extends javax.swing.JPanel {
                             if (connection != null) {
                                 connection.close();
                             }
-                        } catch (SQLException ex) {
+                        }
+                        catch (SQLException ex) {
                             Logger.getLogger(
                                     ConexaoSQL.class.getName()).log(
                                     Level.SEVERE,

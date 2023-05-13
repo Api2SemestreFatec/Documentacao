@@ -23,6 +23,7 @@
  */
 package br.com.lacamentohoraextra.DAO;
 
+import br.com.lacamentohoraextra.utils.Globals;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +52,7 @@ public class LoginDAO {
             PreparedStatement consultaSQL;
 
             try {
-                String query = "SELECT nivel_acesso FROM usuarios WHERE nome_usuario = ? AND senha = ?";
+                String query = "SELECT id, nivel_acesso FROM usuarios WHERE nome_usuario = ? AND senha = ?";
                 consultaSQL = connection.prepareStatement(query);
                 consultaSQL.setString(1, username);
                 consultaSQL.setString(2, password);
@@ -59,6 +60,7 @@ public class LoginDAO {
                 try (ResultSet resultSet = consultaSQL.executeQuery()) {
                     if (resultSet.next()) {
                         perfil = resultSet.getString("nivel_acesso");
+                        Globals.setUserID(resultSet.getInt("id"));
                     } else {
                         throw new SQLException("Invalid username or password");
                     }
