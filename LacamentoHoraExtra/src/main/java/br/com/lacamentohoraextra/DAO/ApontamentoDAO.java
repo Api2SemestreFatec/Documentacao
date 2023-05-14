@@ -52,7 +52,7 @@ public class ApontamentoDAO {
 
             try {
                 String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, situacao"
-                        + " FROM public.vw_colaborador_apontamentos WHERE id_usuario = ?";
+                        + " FROM public.vw_colaborador WHERE id_usuario = ? order by situacao ASC";
                 consultaSQL = connection.prepareStatement(query);
                 consultaSQL.setInt(1, Globals.getUserID());
 

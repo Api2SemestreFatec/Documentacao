@@ -48,14 +48,14 @@ public class TelaAprovacao extends javax.swing.JPanel {
      */
     public TelaAprovacao() {
         initComponents();
-        lblTotal.setText("Total: " + Integer.toString(0));
     }
 
     public void popularTabela() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) tabelaAprovacao.getModel();
         model.setNumRows(0);
 
-        Thread thread = new Thread(() -> {
+        Thread thread;
+        thread = new Thread(() -> {
             try {
                 Object colunas[] = new Object[8];
                 ApontamentoModel apontamentoModel = new ApontamentoModel();
@@ -77,7 +77,6 @@ public class TelaAprovacao extends javax.swing.JPanel {
 
                     model.addRow(colunas);
 
-                    lblTotal.setText("Total: " + listaDeApontamentos.size());
                 }
 
                 tabelaAprovacao.addMouseListener(new MouseAdapter() {
@@ -86,7 +85,8 @@ public class TelaAprovacao extends javax.swing.JPanel {
                         int linhaSelecionada = tabelaAprovacao.getSelectedRow();
 
                         if (e.getClickCount() == 2) {
-                            String situacao = model.getValueAt(linhaSelecionada, 7).toString();
+                            String situacao = null;
+                            situacao = model.getValueAt(linhaSelecionada, 7).toString();
                             int idDataRow = (int) model.getValueAt(linhaSelecionada, 0);
 
                             String situacaoUpdate = JOptionPane.showInputDialog(
@@ -109,7 +109,7 @@ public class TelaAprovacao extends javax.swing.JPanel {
                                         consultaSQL.executeUpdate();
                                         consultaSQL.close();
                                         consultaSQL.close();
-
+                                        
                                         JOptionPane.showMessageDialog(TelaAprovacao.this, "Atualizado com sucesso.");
                                     }
                                     catch (Exception ex) {
@@ -125,9 +125,9 @@ public class TelaAprovacao extends javax.swing.JPanel {
                                         catch (SQLException ex) {
                                             Logger.getLogger(
                                                     TelaAprovacao.class.getName()).log(
-                                                    Level.SEVERE,
-                                                    ex.getMessage(),
-                                                    ex);
+                                                            Level.SEVERE,
+                                                            ex.getMessage(),
+                                                            ex);
                                         }
                                     }
                                 }
@@ -139,9 +139,9 @@ public class TelaAprovacao extends javax.swing.JPanel {
             catch (SQLException ex) {
                 Logger.getLogger(
                         TelaAprovacao.class.getName()).log(
-                        Level.SEVERE,
-                        ex.getMessage(),
-                        ex);
+                                Level.SEVERE,
+                                ex.getMessage(),
+                                ex);
             }
         });
         thread.start();
@@ -158,7 +158,6 @@ public class TelaAprovacao extends javax.swing.JPanel {
 
         lblTitulo = new javax.swing.JLabel();
         btnAtualizar = new javax.swing.JButton();
-        lblTotal = new javax.swing.JLabel();
         scrollPanel = new javax.swing.JScrollPane();
         tabelaAprovacao = new javax.swing.JTable();
 
@@ -182,11 +181,6 @@ public class TelaAprovacao extends javax.swing.JPanel {
                 btnAtualizarActionPerformed(evt);
             }
         });
-
-        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
-        lblTotal.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(0, 102, 255));
-        lblTotal.setText("0");
 
         tabelaAprovacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,15 +221,10 @@ public class TelaAprovacao extends javax.swing.JPanel {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAtualizar)
-                            .addComponent(scrollPanel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(710, Short.MAX_VALUE)
-                        .addComponent(lblTotal)))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAtualizar)
+                    .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -247,9 +236,7 @@ public class TelaAprovacao extends javax.swing.JPanel {
                 .addComponent(btnAtualizar)
                 .addGap(18, 18, 18)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotal)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -270,7 +257,6 @@ public class TelaAprovacao extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTotal;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JTable tabelaAprovacao;
     // End of variables declaration//GEN-END:variables

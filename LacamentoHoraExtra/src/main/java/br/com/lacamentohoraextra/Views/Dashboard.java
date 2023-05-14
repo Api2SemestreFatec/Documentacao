@@ -146,7 +146,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         lblHoraNaoAprovada.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         lblHoraNaoAprovada.setForeground(new java.awt.Color(55, 97, 139));
-        lblHoraNaoAprovada.setText("Horas extras não apontadas");
+        lblHoraNaoAprovada.setText("Horas extras não aprovadas");
 
         totalHorasNaoAprovadas.setBackground(new java.awt.Color(255, 255, 255));
         totalHorasNaoAprovadas.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
