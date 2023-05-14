@@ -109,7 +109,7 @@ public class TelaAprovacao extends javax.swing.JPanel {
                                         consultaSQL.executeUpdate();
                                         consultaSQL.close();
                                         consultaSQL.close();
-                                        
+                                                                                
                                         JOptionPane.showMessageDialog(TelaAprovacao.this, "Atualizado com sucesso.");
                                     }
                                     catch (Exception ex) {
