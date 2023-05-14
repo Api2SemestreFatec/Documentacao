@@ -98,8 +98,8 @@ public class ApontamentoDAO {
             ResultSet resultSet;
 
             try {
-                String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario, situacao"
-                        + " FROM public.vw_colaborador_apontamentos ";
+                String query = "SELECT id_apontamento, cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario, situacao "
+                        + "FROM public.vw_colaborador_apontamentos";
 
                 consultaSQL = connection.prepareStatement(query);
                 resultSet = consultaSQL.executeQuery();
@@ -107,6 +107,7 @@ public class ApontamentoDAO {
                 while (resultSet.next()) {
                     ApontamentoModel apontamentoModel = new ApontamentoModel();
 
+                    apontamentoModel.setIdApontamento(resultSet.getInt("id_apontamento"));
                     apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
                     apontamentoModel.setDataInicialApontamento(resultSet.getString("datahora_inicio"));
                     apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_fim"));
@@ -137,17 +138,17 @@ public class ApontamentoDAO {
         return listaDeApontamento;
     }
     
-    public void updateApontamento(ApontamentoModel apontamentoModel) {
+    public void updateApontamento(Integer id) {
         Connection connection = ConexaoSQL.iniciarConexao();
 
         if (ConexaoSQL.status == true) {
-            String query = "INSERT INTO apontamentos (data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "";
             PreparedStatement consultaSQL = null;
 
             try {
                 consultaSQL = connection.prepareStatement(query);
 
-                consultaSQL.setString(1, apontamentoModel.getSituacao());
+//                consultaSQL.setString(1, apontamentoModel.getSituacao());
 
                 consultaSQL.execute();
             }

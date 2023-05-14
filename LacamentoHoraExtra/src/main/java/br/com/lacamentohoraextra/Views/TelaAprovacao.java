@@ -24,9 +24,12 @@
 package br.com.lacamentohoraextra.Views;
 
 import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.Models.ApontamentoModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -54,7 +57,7 @@ public class TelaAprovacao extends javax.swing.JPanel {
 
         Thread thread = new Thread(() -> {
             try {
-                Object colunas[] = new Object[7];
+                Object colunas[] = new Object[8];
                 ApontamentoModel apontamentoModel = new ApontamentoModel();
 
                 ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
@@ -63,29 +66,72 @@ public class TelaAprovacao extends javax.swing.JPanel {
                 for (int i = 0; i < listaDeApontamentos.size(); i++) {
                     apontamentoModel = listaDeApontamentos.get(i);
 
-                    colunas[0] = apontamentoModel.getCliente_projeto();
-                    colunas[1] = apontamentoModel.getDataInicialApontamento();
-                    colunas[2] = apontamentoModel.getDataFinalApontamento();
-                    colunas[3] = apontamentoModel.getIntervalo();
-                    colunas[4] = apontamentoModel.getJustificativa();
-                    colunas[5] = apontamentoModel.getNomeUsuario();
-                    colunas[6] = apontamentoModel.getSituacao();
+                    colunas[0] = apontamentoModel.getIdApontamento();
+                    colunas[1] = apontamentoModel.getCliente_projeto();
+                    colunas[2] = apontamentoModel.getDataInicialApontamento();
+                    colunas[3] = apontamentoModel.getDataFinalApontamento();
+                    colunas[4] = apontamentoModel.getIntervalo();
+                    colunas[5] = apontamentoModel.getJustificativa();
+                    colunas[6] = apontamentoModel.getNomeUsuario();
+                    colunas[7] = apontamentoModel.getSituacao();
 
                     model.addRow(colunas);
 
                     lblTotal.setText("Total: " + listaDeApontamentos.size());
                 }
-                
+
                 tabelaAprovacao.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        int linhaSelecionada = tabelaAprovacao.getSelectedRow();
+
                         if (e.getClickCount() == 2) {
-                            String situacao = model.getValueAt(tabelaAprovacao.getSelectedRow(), 6).toString();
-                            
+                            String situacao = model.getValueAt(linhaSelecionada, 7).toString();
+                            int idDataRow = (int) model.getValueAt(linhaSelecionada, 0);
+
                             String situacaoUpdate = JOptionPane.showInputDialog(
                                     TelaAprovacao.this,
-                                    "Solitação de aprovação de horas extras \nEntre com a resposta: ", situacao);
-                            
+                                    "Solicitação de aprovação de horas extras \nEntre com a resposta: ", situacao);
+
+                            if (situacaoUpdate != null) {
+                                model.setValueAt(situacaoUpdate, linhaSelecionada, 7);
+                                Connection connection = ConexaoSQL.iniciarConexao();
+
+                                if (ConexaoSQL.status == true) {
+
+                                    try {
+                                        String query = "UPDATE apontamentos SET situacao = ? WHERE id_apontamento = ?";
+                                        PreparedStatement consultaSQL = null;
+                                        consultaSQL = connection.prepareStatement(query);
+
+                                        consultaSQL.setString(1, situacaoUpdate);
+                                        consultaSQL.setInt(2, idDataRow);
+                                        consultaSQL.executeUpdate();
+                                        consultaSQL.close();
+                                        consultaSQL.close();
+
+                                        JOptionPane.showMessageDialog(TelaAprovacao.this, "Atualizado com sucesso.");
+                                    }
+                                    catch (Exception ex) {
+                                        JOptionPane.showMessageDialog(TelaAprovacao.this, "Não possível atualizar o dado.");
+                                    }
+                                    finally {
+                                        try {
+                                            if (connection != null) {
+                                                connection.close();
+                                            }
+
+                                        }
+                                        catch (SQLException ex) {
+                                            Logger.getLogger(
+                                                    TelaAprovacao.class.getName()).log(
+                                                    Level.SEVERE,
+                                                    ex.getMessage(),
+                                                    ex);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 });
@@ -147,14 +193,14 @@ public class TelaAprovacao extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Cliente e Projeto", "Data Hora Inicio", "Data Hora Fim", "Total de horas", "Justificativa", "Colaborador", "Situação"
+                "ID", "Cliente e Projeto", "Data Hora Inicio", "Data Hora Fim", "Total de horas", "Justificativa", "Colaborador", "Situação"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -168,6 +214,9 @@ public class TelaAprovacao extends javax.swing.JPanel {
         tabelaAprovacao.setSelectionBackground(new java.awt.Color(153, 204, 255));
         tabelaAprovacao.setSelectionForeground(new java.awt.Color(0, 0, 102));
         scrollPanel.setViewportView(tabelaAprovacao);
+        if (tabelaAprovacao.getColumnModel().getColumnCount() > 0) {
+            tabelaAprovacao.getColumnModel().getColumn(0).setMaxWidth(30);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,9 +231,7 @@ public class TelaAprovacao extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAtualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnAtualizar)
                             .addComponent(scrollPanel)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(710, Short.MAX_VALUE)

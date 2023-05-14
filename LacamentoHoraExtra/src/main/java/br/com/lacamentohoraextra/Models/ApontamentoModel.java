@@ -31,6 +31,7 @@ import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
  */
 public class ApontamentoModel {
 
+    private Integer idApontamento;
     private String dataInicialApontamento;
     private String dataFinalApontamento;
     private String data_apontamento;
@@ -48,7 +49,8 @@ public class ApontamentoModel {
     public ApontamentoModel() {
     }
 
-    public ApontamentoModel(String dataInicialApontamento, String dataFinalApontamento, String data_apontamento, String horaInicio, String horaFinal, String hora_apontamento, String projeto, String solicitante, String cliente_projeto, String intervalo, String justificativa, String nomeUsuario, String situacao) {
+    public ApontamentoModel(Integer idApontamento, String dataInicialApontamento, String dataFinalApontamento, String data_apontamento, String horaInicio, String horaFinal, String hora_apontamento, String projeto, String solicitante, String cliente_projeto, String intervalo, String justificativa, String nomeUsuario, String situacao) {
+        this.idApontamento = idApontamento;
         this.dataInicialApontamento = dataInicialApontamento;
         this.dataFinalApontamento = dataFinalApontamento;
         this.data_apontamento = data_apontamento;
@@ -62,6 +64,14 @@ public class ApontamentoModel {
         this.justificativa = justificativa;
         this.nomeUsuario = nomeUsuario;
         this.situacao = situacao;
+    }
+
+    public Integer getIdApontamento() {
+        return idApontamento;
+    }
+
+    public void setIdApontamento(Integer idApontamento) {
+        this.idApontamento = idApontamento;
     }
 
     public String getNomeUsuario() {
