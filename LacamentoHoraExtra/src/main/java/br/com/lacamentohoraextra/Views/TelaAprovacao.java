@@ -23,6 +23,17 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+import br.com.lacamentohoraextra.Models.ApontamentoModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author daviramos
@@ -34,6 +45,60 @@ public class TelaAprovacao extends javax.swing.JPanel {
      */
     public TelaAprovacao() {
         initComponents();
+        lblTotal.setText("Total: " + Integer.toString(0));
+    }
+
+    public void popularTabela() throws SQLException {
+        DefaultTableModel model = (DefaultTableModel) tabelaAprovacao.getModel();
+        model.setNumRows(0);
+
+        Thread thread = new Thread(() -> {
+            try {
+                Object colunas[] = new Object[7];
+                ApontamentoModel apontamentoModel = new ApontamentoModel();
+
+                ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
+                listaDeApontamentos = ApontamentoDAO.listarApontamentosGestor();
+
+                for (int i = 0; i < listaDeApontamentos.size(); i++) {
+                    apontamentoModel = listaDeApontamentos.get(i);
+
+                    colunas[0] = apontamentoModel.getCliente_projeto();
+                    colunas[1] = apontamentoModel.getDataInicialApontamento();
+                    colunas[2] = apontamentoModel.getDataFinalApontamento();
+                    colunas[3] = apontamentoModel.getIntervalo();
+                    colunas[4] = apontamentoModel.getJustificativa();
+                    colunas[5] = apontamentoModel.getNomeUsuario();
+                    colunas[6] = apontamentoModel.getSituacao();
+
+                    model.addRow(colunas);
+
+                    lblTotal.setText("Total: " + listaDeApontamentos.size());
+                }
+                
+                tabelaAprovacao.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getClickCount() == 2) {
+                            String situacao = model.getValueAt(tabelaAprovacao.getSelectedRow(), 6).toString();
+                            
+                            String situacaoUpdate = JOptionPane.showInputDialog(
+                                    TelaAprovacao.this,
+                                    "Solitação de aprovação de horas extras \nEntre com a resposta: ", situacao);
+                            
+                        }
+                    }
+                });
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(
+                        TelaAprovacao.class.getName()).log(
+                        Level.SEVERE,
+                        ex.getMessage(),
+                        ex);
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -46,17 +111,16 @@ public class TelaAprovacao extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        txtDataInicial = new javax.swing.JTextField();
-        txtHoraInicial = new javax.swing.JTextField();
-        txtHoraFinal = new javax.swing.JTextField();
+        btnAtualizar = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
+        scrollPanel = new javax.swing.JScrollPane();
+        tabelaAprovacao = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 51, 102));
         setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(764, 600));
-        setPreferredSize(new java.awt.Dimension(776, 592));
+        setPreferredSize(new java.awt.Dimension(764, 600));
 
         lblTitulo.setBackground(new java.awt.Color(255, 255, 255));
         lblTitulo.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -64,40 +128,46 @@ public class TelaAprovacao extends javax.swing.JPanel {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Aprovação");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnAtualizar.setBackground(new java.awt.Color(0, 51, 102));
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setText("Atualizar tabela");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotal.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 102, 255));
+        lblTotal.setText("0");
+
+        tabelaAprovacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cliente e Projeto", "Data Hora Inicio", "Data Hora Fim", "Total de horas", "Justificativa", "Colaborador", "Situação"
             }
-        ));
-        jTable1.setRowMargin(24);
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        txtDataInicial.setBackground(new java.awt.Color(255, 255, 255));
-        txtDataInicial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        txtDataInicial.setForeground(new java.awt.Color(0, 51, 102));
-        txtDataInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Data inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        txtDataInicial.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        txtDataInicial.setName("txtDataInicial"); // NOI18N
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        txtHoraInicial.setBackground(new java.awt.Color(255, 255, 255));
-        txtHoraInicial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        txtHoraInicial.setForeground(new java.awt.Color(0, 51, 102));
-        txtHoraInicial.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora inicial", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        txtHoraInicial.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        txtHoraInicial.setName("username"); // NOI18N
-
-        txtHoraFinal.setBackground(new java.awt.Color(255, 255, 255));
-        txtHoraFinal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        txtHoraFinal.setForeground(new java.awt.Color(0, 51, 102));
-        txtHoraFinal.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Hora final", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
-        txtHoraFinal.setDisabledTextColor(new java.awt.Color(0, 0, 102));
-        txtHoraFinal.setName("username"); // NOI18N
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaAprovacao.setSelectionBackground(new java.awt.Color(153, 204, 255));
+        tabelaAprovacao.setSelectionForeground(new java.awt.Color(0, 0, 102));
+        scrollPanel.setViewportView(tabelaAprovacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,19 +175,21 @@ public class TelaAprovacao extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAtualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(scrollPanel)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(710, Short.MAX_VALUE)
+                        .addComponent(lblTotal)))
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,23 +197,34 @@ public class TelaAprovacao extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addComponent(btnAtualizar)
+                .addGap(18, 18, 18)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTotal)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        try {
+            popularTabela();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(
+                    TelaAprovacao.class.getName()).log(
+                    Level.SEVERE,
+                    e.getMessage(),
+                    e);
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtDataInicial;
-    private javax.swing.JTextField txtHoraFinal;
-    private javax.swing.JTextField txtHoraInicial;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTable tabelaAprovacao;
     // End of variables declaration//GEN-END:variables
 }

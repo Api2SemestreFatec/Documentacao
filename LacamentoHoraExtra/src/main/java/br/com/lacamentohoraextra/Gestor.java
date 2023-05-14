@@ -23,6 +23,7 @@
  */
 package br.com.lacamentohoraextra;
 
+import br.com.lacamentohoraextra.Views.Dashboard;
 import br.com.lacamentohoraextra.Views.TelaAprovacao;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.BorderLayout;
@@ -48,9 +49,9 @@ public class Gestor extends javax.swing.JFrame {
 
     public void init() {
         btnAprovacao.setSelected(false);
-        btnCliente.setSelected(false);
         btnDashboard.setSelected(true);
         btnLancamento.setSelected(false);
+        showApontamento(Dashboard.class);
     }
 
     private void showApontamento(Class<?> gestorClass) {
@@ -94,7 +95,6 @@ public class Gestor extends javax.swing.JFrame {
         btnDashboard = new javax.swing.JButton();
         btnLancamento = new javax.swing.JButton();
         btnAprovacao = new javax.swing.JButton();
-        btnCliente = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
@@ -119,12 +119,18 @@ public class Gestor extends javax.swing.JFrame {
         btnDashboard.setText("Dashboard");
         btnDashboard.setBorder(null);
         btnDashboard.setContentAreaFilled(false);
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
 
         btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnLancamento.setForeground(new java.awt.Color(153, 204, 255));
         btnLancamento.setText("Lançamentos");
         btnLancamento.setBorder(null);
         btnLancamento.setContentAreaFilled(false);
+        btnLancamento.setEnabled(false);
 
         btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
@@ -136,12 +142,6 @@ public class Gestor extends javax.swing.JFrame {
                 btnAprovacaoActionPerformed(evt);
             }
         });
-
-        btnCliente.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        btnCliente.setForeground(new java.awt.Color(153, 204, 255));
-        btnCliente.setText("Clientes");
-        btnCliente.setBorder(null);
-        btnCliente.setContentAreaFilled(false);
 
         btnSair.setBackground(new java.awt.Color(255, 255, 255));
         btnSair.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -166,7 +166,6 @@ public class Gestor extends javax.swing.JFrame {
                     .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(btnAprovacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -179,9 +178,7 @@ public class Gestor extends javax.swing.JFrame {
                 .addComponent(btnLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAprovacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -243,11 +240,17 @@ public class Gestor extends javax.swing.JFrame {
 
     private void btnAprovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprovacaoActionPerformed
         btnAprovacao.setSelected(true);
-        btnCliente.setSelected(false);
         btnDashboard.setSelected(false);
         btnLancamento.setSelected(false);
         showApontamento(TelaAprovacao.class);
     }//GEN-LAST:event_btnAprovacaoActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        btnAprovacao.setSelected(false);
+        btnDashboard.setSelected(true);
+        btnLancamento.setSelected(false);
+        showApontamento(Dashboard.class);
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +269,6 @@ public class Gestor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAprovacao;
-    private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnLancamento;
     private javax.swing.JButton btnSair;

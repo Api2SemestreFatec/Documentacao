@@ -24,7 +24,6 @@
 package br.com.lacamentohoraextra.Views;
 
 import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
-import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.Models.ApontamentoModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -104,6 +103,7 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(764, 600));
         setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(764, 600));
 
         lblTitulo.setBackground(new java.awt.Color(255, 255, 255));
         lblTitulo.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -112,6 +112,7 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         lblTitulo.setText("Histórico de apontamentos");
 
         tabela.setBackground(new java.awt.Color(255, 255, 255));
+        tabela.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         tabela.setForeground(new java.awt.Color(0, 0, 102));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,11 +167,12 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblTotal)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAtualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(555, 555, 555))
+                    .addComponent(scrollPanel, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +196,7 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
         }
         catch (SQLException e) {
             Logger.getLogger(
-                    ConexaoSQL.class.getName()).log(
+                    ApontamentoHistorico.class.getName()).log(
                     Level.SEVERE,
                     e.getMessage(),
                     e);

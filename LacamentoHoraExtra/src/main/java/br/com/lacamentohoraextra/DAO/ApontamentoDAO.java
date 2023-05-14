@@ -70,6 +70,7 @@ public class ApontamentoDAO {
 
                     listaDeApontamento.add(apontamentoModel);
                 }
+                connection.close();
             }
             catch (SQLException e) {
                 Logger.getLogger(
@@ -84,6 +85,7 @@ public class ApontamentoDAO {
                 }
             }
         }
+
         return listaDeApontamento;
     }
 
@@ -96,9 +98,8 @@ public class ApontamentoDAO {
             ResultSet resultSet;
 
             try {
-                String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario"
-                        + " FROM public.vw_colaborador_apontamentos "
-                        + " WHERE ";
+                String query = "SELECT cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario, situacao"
+                        + " FROM public.vw_colaborador_apontamentos ";
 
                 consultaSQL = connection.prepareStatement(query);
                 resultSet = consultaSQL.executeQuery();
@@ -108,13 +109,15 @@ public class ApontamentoDAO {
 
                     apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
                     apontamentoModel.setDataInicialApontamento(resultSet.getString("datahora_inicio"));
-                    apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_inicio"));
+                    apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_fim"));
                     apontamentoModel.setIntervalo(resultSet.getString("intervalo"));
                     apontamentoModel.setJustificativa(resultSet.getString("justificativa"));
-                    apontamentoModel.setSituacao(resultSet.getString("nome_usuario"));
+                    apontamentoModel.setNomeUsuario(resultSet.getString("nome_usuario"));
+                    apontamentoModel.setSituacao(resultSet.getString("situacao"));
 
                     listaDeApontamento.add(apontamentoModel);
                 }
+                connection.close();
             }
             catch (SQLException e) {
                 Logger.getLogger(
@@ -128,8 +131,61 @@ public class ApontamentoDAO {
                     connection.close();
                 }
             }
+
         }
+
         return listaDeApontamento;
+    }
+    
+    public void updateApontamento(ApontamentoModel apontamentoModel) {
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            String query = "INSERT INTO apontamentos (data_inicio, data_final, hora_inicio, hora_final, nome_cliente, nome_projeto, justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement consultaSQL = null;
+
+            try {
+                consultaSQL = connection.prepareStatement(query);
+
+                consultaSQL.setString(1, apontamentoModel.getSituacao());
+
+                consultaSQL.execute();
+            }
+            catch (SQLException e) {
+                Logger.getLogger(
+                        ConexaoSQL.class.getName()).log(
+                        Level.SEVERE,
+                        e.getMessage(),
+                        e);
+            }
+            finally {
+                try {
+                    if (consultaSQL != null) {
+                        consultaSQL.close();
+                    }
+                }
+                catch (SQLException e) {
+                    Logger.getLogger(
+                            ConexaoSQL.class.getName()).log(
+                            Level.SEVERE,
+                            e.getMessage(),
+                            e);
+                }
+
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                }
+                catch (SQLException e) {
+                    Logger.getLogger(
+                            ConexaoSQL.class.getName()).log(
+                            Level.SEVERE,
+                            e.getMessage(),
+                            e);
+                }
+            }
+        }
     }
 
     public void cadastrarApontamento(ApontamentoModel apontamento) {
