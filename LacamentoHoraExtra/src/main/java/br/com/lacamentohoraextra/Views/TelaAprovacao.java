@@ -193,6 +193,9 @@ public class TelaAprovacao extends javax.swing.JPanel {
             }
         });
 
+        tabelaAprovacao.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaAprovacao.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tabelaAprovacao.setForeground(new java.awt.Color(0, 0, 102));
         tabelaAprovacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -45,11 +45,14 @@ public class ApontamentoModel {
     private String justificativa;
     private String nomeUsuario;
     private String situacao;
+    private String horaPendente;
+    private String horaAprovada;
+    private String horaNaoAprovada;
 
     public ApontamentoModel() {
     }
 
-    public ApontamentoModel(Integer idApontamento, String dataInicialApontamento, String dataFinalApontamento, String data_apontamento, String horaInicio, String horaFinal, String hora_apontamento, String projeto, String solicitante, String cliente_projeto, String intervalo, String justificativa, String nomeUsuario, String situacao) {
+    public ApontamentoModel(Integer idApontamento, String dataInicialApontamento, String dataFinalApontamento, String data_apontamento, String horaInicio, String horaFinal, String hora_apontamento, String projeto, String solicitante, String cliente_projeto, String intervalo, String justificativa, String nomeUsuario, String situacao, String horaPendente, String horaAprovada, String horaNaoAprovada) {
         this.idApontamento = idApontamento;
         this.dataInicialApontamento = dataInicialApontamento;
         this.dataFinalApontamento = dataFinalApontamento;
@@ -64,7 +67,36 @@ public class ApontamentoModel {
         this.justificativa = justificativa;
         this.nomeUsuario = nomeUsuario;
         this.situacao = situacao;
+        this.horaPendente = horaPendente;
+        this.horaAprovada = horaAprovada;
+        this.horaNaoAprovada = horaNaoAprovada;
     }
+
+    public String getHoraPendente() {
+        return horaPendente;
+    }
+
+    public void setHoraPendente(String horaPendente) {
+        this.horaPendente = horaPendente;
+    }
+
+    public String getHoraAprovada() {
+        return horaAprovada;
+    }
+
+    public void setHoraAprovada(String horaAprovada) {
+        this.horaAprovada = horaAprovada;
+    }
+
+    public String getHoraNaoAprovada() {
+        return horaNaoAprovada;
+    }
+
+    public void setHoraNaoAprovada(String horaNaoAprovada) {
+        this.horaNaoAprovada = horaNaoAprovada;
+    }
+
+    
 
     public Integer getIdApontamento() {
         return idApontamento;

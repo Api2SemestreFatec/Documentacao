@@ -23,6 +23,14 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+import br.com.lacamentohoraextra.Models.ApontamentoModel;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author daviramos
@@ -34,6 +42,35 @@ public class Dashboard extends javax.swing.JPanel {
      */
     public Dashboard() {
         initComponents();
+        init();
+    }
+
+    private void init() {
+
+        Thread thread = new Thread(() -> {
+            try {
+                ArrayList<ApontamentoModel> listaDeApontamentos = ApontamentoDAO.dadosDashboard();
+
+                if (!listaDeApontamentos.isEmpty()) {
+                    ApontamentoModel apontamentoModel = listaDeApontamentos.get(0);
+
+                    String horasPendentes = apontamentoModel.getHoraPendente();
+                    String horasAprovadas = apontamentoModel.getHoraAprovada();
+                    String horasNaoAprovadas = apontamentoModel.getHoraNaoAprovada();
+
+                    SwingUtilities.invokeLater(() -> {
+                        totalHorasPendentes.setText( horasPendentes);
+                        totalHorasAprovadas.setText(horasAprovadas);
+                        totalHorasNaoAprovadas.setText(horasNaoAprovadas);
+                    });
+                }
+
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -67,7 +104,7 @@ public class Dashboard extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(764, 600));
         setPreferredSize(new java.awt.Dimension(764, 600));
 
-        cardHoraPendente.setBackground(new java.awt.Color(221, 231, 241));
+        cardHoraPendente.setBackground(new java.awt.Color(245, 245, 245));
         cardHoraPendente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 16));
         cardHoraPendente.setForeground(new java.awt.Color(55, 97, 139));
         cardHoraPendente.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -78,7 +115,7 @@ public class Dashboard extends javax.swing.JPanel {
         lblHoraPendente.setText("Horas extras pendentes");
 
         totalHorasPendentes.setBackground(new java.awt.Color(255, 255, 255));
-        totalHorasPendentes.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        totalHorasPendentes.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         totalHorasPendentes.setForeground(new java.awt.Color(0, 51, 102));
         totalHorasPendentes.setText("00:00");
 
@@ -100,10 +137,10 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(lblHoraPendente)
                 .addGap(18, 18, 18)
                 .addComponent(totalHorasPendentes)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        cardHoraAprovada.setBackground(new java.awt.Color(221, 231, 241));
+        cardHoraAprovada.setBackground(new java.awt.Color(245, 245, 245));
         cardHoraAprovada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 16));
         cardHoraAprovada.setForeground(new java.awt.Color(55, 97, 139));
         cardHoraAprovada.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -114,7 +151,7 @@ public class Dashboard extends javax.swing.JPanel {
         lblHoraAprovada.setText("Horas extras aprovadas");
 
         totalHorasAprovadas.setBackground(new java.awt.Color(255, 255, 255));
-        totalHorasAprovadas.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        totalHorasAprovadas.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         totalHorasAprovadas.setForeground(new java.awt.Color(0, 51, 102));
         totalHorasAprovadas.setText("00:00");
 
@@ -136,10 +173,10 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(lblHoraAprovada)
                 .addGap(18, 18, 18)
                 .addComponent(totalHorasAprovadas)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        cardHoraNaoAprovada.setBackground(new java.awt.Color(221, 231, 241));
+        cardHoraNaoAprovada.setBackground(new java.awt.Color(245, 245, 245));
         cardHoraNaoAprovada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 16));
         cardHoraNaoAprovada.setForeground(new java.awt.Color(55, 97, 139));
         cardHoraNaoAprovada.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -149,7 +186,7 @@ public class Dashboard extends javax.swing.JPanel {
         lblHoraNaoAprovada.setText("Horas extras não aprovadas");
 
         totalHorasNaoAprovadas.setBackground(new java.awt.Color(255, 255, 255));
-        totalHorasNaoAprovadas.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        totalHorasNaoAprovadas.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         totalHorasNaoAprovadas.setForeground(new java.awt.Color(0, 51, 102));
         totalHorasNaoAprovadas.setText("00:00");
 

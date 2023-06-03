@@ -25,6 +25,7 @@ package br.com.lacamentohoraextra;
 
 import br.com.lacamentohoraextra.Views.Dashboard;
 import br.com.lacamentohoraextra.Views.TelaAprovacao;
+import br.com.lacamentohoraextra.Views.TelaLancamento;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.BorderLayout;
 import java.lang.reflect.InvocationTargetException;
@@ -50,7 +51,7 @@ public class Gestor extends javax.swing.JFrame {
     public void init() {
         btnAprovacao.setSelected(false);
         btnDashboard.setSelected(true);
-        btnLancamento.setSelected(false);
+        btnLancamento.setSelected(true);
         showApontamento(TelaAprovacao.class);
     }
 
@@ -130,11 +131,15 @@ public class Gestor extends javax.swing.JFrame {
         btnLancamento.setText("Lançamentos");
         btnLancamento.setBorder(null);
         btnLancamento.setContentAreaFilled(false);
-        btnLancamento.setEnabled(false);
+        btnLancamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLancamentoActionPerformed(evt);
+            }
+        });
 
         btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
-        btnAprovacao.setText("Aprovações");
+        btnAprovacao.setText("Aprovar");
         btnAprovacao.setBorder(null);
         btnAprovacao.setContentAreaFilled(false);
         btnAprovacao.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +196,7 @@ public class Gestor extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGap(0, 764, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +210,7 @@ public class Gestor extends javax.swing.JFrame {
             .addGroup(containerLayout.createSequentialGroup()
                 .addComponent(sidebarmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,18 +244,25 @@ public class Gestor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAprovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprovacaoActionPerformed
-        btnAprovacao.setSelected(true);
-        btnDashboard.setSelected(false);
-        btnLancamento.setSelected(false);
+        btnAprovacao.setSelected(false);
+        btnDashboard.setSelected(true);
+        btnLancamento.setSelected(true);
         showApontamento(TelaAprovacao.class);
     }//GEN-LAST:event_btnAprovacaoActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
-        btnAprovacao.setSelected(false);
-        btnDashboard.setSelected(true);
-        btnLancamento.setSelected(false);
+        btnAprovacao.setSelected(true);
+        btnDashboard.setSelected(false);
+        btnLancamento.setSelected(true);
         showApontamento(Dashboard.class);
     }//GEN-LAST:event_btnDashboardActionPerformed
+
+    private void btnLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancamentoActionPerformed
+        btnAprovacao.setSelected(true);
+        btnDashboard.setSelected(true);
+        btnLancamento.setSelected(false);
+        showApontamento(TelaLancamento.class);
+    }//GEN-LAST:event_btnLancamentoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -42,6 +42,7 @@ public class TelaCadastro extends javax.swing.JPanel {
         tpCadastro.addTab("Cliente", new TelaCadastroCliente());
         tpCadastro.addTab("Centro de resultados", new TelaCadastroCR());
         tpCadastro.addTab("Projeto", new TelaCadastroProjeto());
+        tpCadastro.addTab("Parametrização", new TelaParametrizacao());
 
         tpCadastro.revalidate();
         tpCadastro.repaint();

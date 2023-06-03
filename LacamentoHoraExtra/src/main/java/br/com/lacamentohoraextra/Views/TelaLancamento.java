@@ -23,6 +23,16 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
+import br.com.lacamentohoraextra.Models.ApontamentoModel;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author daviramos
@@ -34,6 +44,55 @@ public class TelaLancamento extends javax.swing.JPanel {
      */
     public TelaLancamento() {
         initComponents();
+        
+        CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+            try {
+                popularTabela();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(ApontamentoHistorico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+     public void popularTabela() throws SQLException {
+        DefaultTableModel model = (DefaultTableModel) tabelaLancamento.getModel();
+        model.setNumRows(0);
+
+        Thread thread;
+        thread = new Thread(() -> {
+            try {
+                Object colunas[] = new Object[8];
+                ApontamentoModel apontamentoModel = new ApontamentoModel();
+
+                ArrayList<ApontamentoModel> listaDeApontamentos = new ArrayList<ApontamentoModel>();
+                listaDeApontamentos = ApontamentoDAO.listarTodosApontamentos();
+
+                for (int i = 0; i < listaDeApontamentos.size(); i++) {
+                    apontamentoModel = listaDeApontamentos.get(i);
+
+                    colunas[0] = apontamentoModel.getIdApontamento();
+                    colunas[1] = apontamentoModel.getCliente_projeto();
+                    colunas[2] = apontamentoModel.getDataInicialApontamento();
+                    colunas[3] = apontamentoModel.getDataFinalApontamento();
+                    colunas[4] = apontamentoModel.getIntervalo();
+                    colunas[5] = apontamentoModel.getJustificativa();
+                    colunas[6] = apontamentoModel.getNomeUsuario();
+                    colunas[7] = apontamentoModel.getSituacao();
+
+                    model.addRow(colunas);
+
+                }
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(
+                        TelaAprovacao.class.getName()).log(
+                                Level.SEVERE,
+                                ex.getMessage(),
+                                ex);
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -47,6 +106,9 @@ public class TelaLancamento extends javax.swing.JPanel {
 
         container = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        scrollPanel = new javax.swing.JScrollPane();
+        tabelaLancamento = new javax.swing.JTable();
+        btnAtualizar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 102));
@@ -67,6 +129,45 @@ public class TelaLancamento extends javax.swing.JPanel {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Lançamentos");
 
+        tabelaLancamento.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaLancamento.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tabelaLancamento.setForeground(new java.awt.Color(0, 0, 102));
+        tabelaLancamento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Cliente e Projeto", "Data Hora Inicio", "Data Hora Fim", "Total de horas", "Justificativa", "Colaborador", "Situação"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaLancamento.setSelectionBackground(new java.awt.Color(153, 204, 255));
+        tabelaLancamento.setSelectionForeground(new java.awt.Color(0, 0, 102));
+        scrollPanel.setViewportView(tabelaLancamento);
+
+        btnAtualizar.setBackground(new java.awt.Color(0, 51, 102));
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setText("Atualizar tabela");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
@@ -74,31 +175,57 @@ public class TelaLancamento extends javax.swing.JPanel {
             .addGroup(containerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(containerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAtualizar)
+                    .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(555, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAtualizar)
+                .addGap(18, 18, 18)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        try {
+            popularTabela();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(
+                TelaAprovacao.class.getName()).log(
+                Level.SEVERE,
+                e.getMessage(),
+                e);
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JPanel container;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTable tabelaLancamento;
     // End of variables declaration//GEN-END:variables
 }

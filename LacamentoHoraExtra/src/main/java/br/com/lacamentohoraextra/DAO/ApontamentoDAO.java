@@ -99,7 +99,56 @@ public class ApontamentoDAO {
 
             try {
                 String query = "SELECT id_apontamento, cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario, situacao "
-                        + "FROM public.vw_colaborador_apontamentos";
+                        + "FROM public.vw_colaborador_apontamentos WHERE situacao = 'pendente'";
+
+                consultaSQL = connection.prepareStatement(query);
+                resultSet = consultaSQL.executeQuery();
+
+                while (resultSet.next()) {
+                    ApontamentoModel apontamentoModel = new ApontamentoModel();
+
+                    apontamentoModel.setIdApontamento(resultSet.getInt("id_apontamento"));
+                    apontamentoModel.setCliente_projeto(resultSet.getString("cliente_projeto"));
+                    apontamentoModel.setDataInicialApontamento(resultSet.getString("datahora_inicio"));
+                    apontamentoModel.setDataFinalApontamento(resultSet.getString("datahora_fim"));
+                    apontamentoModel.setIntervalo(resultSet.getString("intervalo"));
+                    apontamentoModel.setJustificativa(resultSet.getString("justificativa"));
+                    apontamentoModel.setNomeUsuario(resultSet.getString("nome_usuario"));
+                    apontamentoModel.setSituacao(resultSet.getString("situacao"));
+
+                    listaDeApontamento.add(apontamentoModel);
+                }
+                connection.close();
+            }
+            catch (SQLException e) {
+                Logger.getLogger(
+                        ConexaoSQL.class.getName()).log(
+                        Level.SEVERE,
+                        e.getMessage(),
+                        e);
+            }
+            finally {
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+
+        }
+
+        return listaDeApontamento;
+    }
+
+    public static ArrayList<ApontamentoModel> listarTodosApontamentos() throws SQLException {
+        ArrayList<ApontamentoModel> listaDeApontamento = new ArrayList<>();
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            PreparedStatement consultaSQL;
+            ResultSet resultSet;
+
+            try {
+                String query = "SELECT id_apontamento, cliente_projeto, datahora_inicio, datahora_fim, intervalo, justificativa, nome_usuario, situacao "
+                        + "FROM public.vw_colaborador_apontamentos order by situacao DESC";
 
                 consultaSQL = connection.prepareStatement(query);
                 resultSet = consultaSQL.executeQuery();
@@ -138,6 +187,49 @@ public class ApontamentoDAO {
         return listaDeApontamento;
     }
     
+    public static ArrayList<ApontamentoModel> dadosDashboard() throws SQLException {
+        ArrayList<ApontamentoModel> listaDeApontamento = new ArrayList<>();
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            PreparedStatement consultaSQL;
+            ResultSet resultSet;
+
+            try {
+                String query = "SELECT horas_pendentes, horas_aprovadas, horas_nao_aprovadas FROM public.vw_dashboard_horas";
+
+                consultaSQL = connection.prepareStatement(query);
+                resultSet = consultaSQL.executeQuery();
+
+                while (resultSet.next()) {
+                    ApontamentoModel apontamentoModel = new ApontamentoModel();
+
+                    apontamentoModel.setHoraPendente(resultSet.getString("horas_pendentes"));
+                    apontamentoModel.setHoraAprovada(resultSet.getString("horas_aprovadas"));
+                    apontamentoModel.setHoraNaoAprovada(resultSet.getString("horas_nao_aprovadas"));
+
+                    listaDeApontamento.add(apontamentoModel);
+                }
+                connection.close();
+            }
+            catch (SQLException e) {
+                Logger.getLogger(
+                        ConexaoSQL.class.getName()).log(
+                        Level.SEVERE,
+                        e.getMessage(),
+                        e);
+            }
+            finally {
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+
+        }
+
+        return listaDeApontamento;
+    }
+
     public void updateApontamento(Integer id) {
         Connection connection = ConexaoSQL.iniciarConexao();
 
@@ -149,7 +241,6 @@ public class ApontamentoDAO {
                 consultaSQL = connection.prepareStatement(query);
 
 //                consultaSQL.setString(1, apontamentoModel.getSituacao());
-
                 consultaSQL.execute();
             }
             catch (SQLException e) {

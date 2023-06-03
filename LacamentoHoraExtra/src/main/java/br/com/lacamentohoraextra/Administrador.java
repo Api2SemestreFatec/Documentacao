@@ -4,11 +4,13 @@
  */
 package br.com.lacamentohoraextra;
 
+import br.com.lacamentohoraextra.Views.Dashboard;
+import br.com.lacamentohoraextra.Views.TelaAprovacao;
 import br.com.lacamentohoraextra.Views.TelaCadastro;
+import br.com.lacamentohoraextra.Views.TelaLancamento;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.BorderLayout;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -34,6 +36,7 @@ public class Administrador extends javax.swing.JFrame {
         btnDashboard.setSelected(false);
         btnLancamento.setSelected(false);
         btnAprovacao.setSelected(false);
+        btnCadastro.setSelected(false);
         
         botaoSelecionado.setSelected(true);
     }
@@ -97,22 +100,37 @@ public class Administrador extends javax.swing.JFrame {
         sidebarmenu.setForeground(new java.awt.Color(0, 51, 102));
 
         btnDashboard.setBackground(new java.awt.Color(255, 255, 255));
-        btnDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnDashboard.setForeground(new java.awt.Color(153, 204, 255));
         btnDashboard.setText("Dashboard");
         btnDashboard.setContentAreaFilled(false);
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
 
-        btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnLancamento.setForeground(new java.awt.Color(153, 204, 255));
         btnLancamento.setText("Lançamentos");
         btnLancamento.setContentAreaFilled(false);
+        btnLancamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLancamentoActionPerformed(evt);
+            }
+        });
 
-        btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
-        btnAprovacao.setText("Aprovações");
+        btnAprovacao.setText("Aprovar");
         btnAprovacao.setContentAreaFilled(false);
+        btnAprovacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAprovacaoActionPerformed(evt);
+            }
+        });
 
-        btnCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnCadastro.setForeground(new java.awt.Color(153, 204, 255));
         btnCadastro.setText("Cadastro");
         btnCadastro.setContentAreaFilled(false);
@@ -220,14 +238,23 @@ public class Administrador extends javax.swing.JFrame {
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         selecionarBotao(btnCadastro);
-        try {
-            TelaCadastro telaCadastro = new TelaCadastro();
-            telaCadastro.setVisible(true);
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        showTela(TelaCadastro.class);
     }//GEN-LAST:event_btnCadastroActionPerformed
+
+    private void btnLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancamentoActionPerformed
+        selecionarBotao(btnLancamento);
+        showTela(TelaLancamento.class);
+    }//GEN-LAST:event_btnLancamentoActionPerformed
+
+    private void btnAprovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprovacaoActionPerformed
+        selecionarBotao(btnAprovacao);
+        showTela(TelaAprovacao.class);
+    }//GEN-LAST:event_btnAprovacaoActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        selecionarBotao(btnDashboard);
+        showTela(Dashboard.class);
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
      * @param args the command line arguments

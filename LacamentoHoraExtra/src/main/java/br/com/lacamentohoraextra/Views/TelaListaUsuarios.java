@@ -23,6 +23,7 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.DAO.UsuariosDAO;
 import br.com.lacamentohoraextra.Models.UsuariosModel;
 import java.sql.SQLException;
@@ -35,6 +36,10 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -98,64 +103,50 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         thread.start();
     }
 
-    // TODO: Não está com os campos corretos ainda 
-    public void exportarParaCSV() {
-        try {
-            DefaultTableModel model = (DefaultTableModel) tblListaUsuarios.getModel();
-            int rowCount = model.getRowCount();
+    private void exportToCSV() {
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
 
-            if (rowCount == 0) {
-                // Não há dados para exportar
-                return;
-            }
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String filePath = fileChooser.getSelectedFile().getPath();
 
-            // Obter o diretório da pasta de documentos do usuário
-            String filePath = "";
+            try {
 
-            if (SystemUtils.IS_OS_WINDOWS) {
-                String userHome = System.getProperty("user.home");
-                filePath = userHome + File.separator + "Documentos" + File.separator + "usuarios.csv";
-            } else if (SystemUtils.IS_OS_LINUX) {
-                String userHome = System.getProperty("user.home");
-                filePath = userHome + File.separator + "Documentos" + File.separator + "usuarios.csv";
-            } else {
-                // Sistema operacional não suportado
-                return;
-            }
+                Connection connection = ConexaoSQL.iniciarConexao();
+                Statement statement = connection.createStatement();
 
-            FileWriter writer = new FileWriter(filePath);
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM relatorio_de_apontamentos");
 
-            // Escrever o cabeçalho do arquivo CSV
-            writer.append("ID,Nome de Usuário,Equipe,Matrícula");
-            writer.append("\n");
+                FileWriter writer = new FileWriter(filePath);
 
-            for (int i = 0; i < rowCount; i++) {
-                Object[] rowData = new Object[model.getColumnCount()];
-                for (int j = 0; j < model.getColumnCount(); j++) {
-                    rowData[j] = model.getValueAt(i, j);
+                writer.append("Matricula, Nome Usuario, Verba, Intervalo, Nome Cliente, CR, Nome Projeto, Justificativa\n");
+
+                while (resultSet.next()) {
+                    String matricula = resultSet.getString("matricula");
+                    String nomeUsuario = resultSet.getString("nome_usuario");
+                    String verba = resultSet.getString("verba");
+                    String intervalo = resultSet.getString("intervalo");
+                    String nomeCliente = resultSet.getString("nome_cliente");
+                    String cr = resultSet.getString("cr");
+                    String nomeProjeto = resultSet.getString("nome_projeto");
+                    String justificativa = resultSet.getString("justificativa");
+
+                    writer.append(matricula).append(",").append(nomeUsuario).append(",").append(verba).append(",")
+                            .append(intervalo).append(",").append(nomeCliente).append(",").append(cr).append(",")
+                            .append(nomeProjeto).append(",").append(justificativa).append("\n");
                 }
 
-                // Escrever os dados no arquivo CSV
-                writer.append(rowData[0].toString());
-                writer.append(",");
-                writer.append(rowData[1].toString());
-                writer.append(",");
-                writer.append(rowData[2].toString());
-                writer.append(",");
-                writer.append(rowData[3].toString());
-                writer.append("\n");
+                writer.flush();
+                writer.close();
+
+                JOptionPane.showMessageDialog(this, "Data exported to CSV successfully.");
             }
-
-            writer.flush();
-            writer.close();
-
-            // Exibir uma mensagem de sucesso
-            JOptionPane.showMessageDialog(null, "Os dados foram exportados para o arquivo CSV com sucesso!");
-
-        }
-        catch (IOException ex) {
-            // Tratar exceção de IO
-            Logger.getLogger(TelaListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error exporting data to CSV.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error accessing the database.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -172,7 +163,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         scrollPaneListaUsuarios = new javax.swing.JScrollPane();
         tblListaUsuarios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -220,11 +211,16 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         tblListaUsuarios.setSelectionForeground(new java.awt.Color(0, 0, 102));
         scrollPaneListaUsuarios.setViewportView(tblListaUsuarios);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 102));
-        jButton1.setText("Exportar Relatório");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102)));
+        btnExportar.setBackground(new java.awt.Color(255, 255, 255));
+        btnExportar.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnExportar.setForeground(new java.awt.Color(0, 0, 102));
+        btnExportar.setText("Exportar Relatório");
+        btnExportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102)));
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
 
         lblTotal.setBackground(new java.awt.Color(255, 255, 255));
         lblTotal.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
@@ -250,7 +246,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
                                     .addComponent(scrollPaneListaUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                                     .addGroup(pContentLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(44, 44, 44)))
                 .addContainerGap())
         );
@@ -260,7 +256,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(scrollPaneListaUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,6 +278,12 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        btnExportar.addActionListener(e -> {
+            exportToCSV();
+        });
+    }//GEN-LAST:event_btnExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,7 +326,7 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel pContent;
