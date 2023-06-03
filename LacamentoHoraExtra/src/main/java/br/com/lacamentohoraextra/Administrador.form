@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="sidebarBtnGroup">
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -101,9 +97,8 @@
                           <Component id="btnDashboard" max="32767" attributes="0"/>
                           <Component id="btnLancamento" pref="158" max="32767" attributes="0"/>
                           <Component id="btnAprovacao" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnProjeto" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnCliente1" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnCadastro" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -115,14 +110,12 @@
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Component id="btnDashboard" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnLancamento" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnCadastro" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnAprovacao" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCliente1" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnProjeto" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <Component id="btnLancamento" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace pref="233" max="32767" attributes="0"/>
                       <Component id="btnSair" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -136,7 +129,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
+                  <Font name="Liberation Sans" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -148,7 +141,7 @@
             <Component class="javax.swing.JButton" name="btnLancamento">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
+                  <Font name="Liberation Sans" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -160,7 +153,7 @@
             <Component class="javax.swing.JButton" name="btnAprovacao">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
+                  <Font name="Liberation Sans" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -169,34 +162,25 @@
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnProjeto">
+            <Component class="javax.swing.JButton" name="btnCadastro">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
+                  <Font name="Liberation Sans" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Projetos"/>
+                <Property name="text" type="java.lang.String" value="Cadastro"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnCliente1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="99" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Clientes"/>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSair">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Liberation Sans" size="14" style="1"/>
+                  <Font name="Liberation Sans" size="12" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -204,6 +188,9 @@
                 <Property name="text" type="java.lang.String" value="Sair"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

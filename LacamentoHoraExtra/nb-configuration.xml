@@ -63,5 +63,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-spi-editor-hints-projects.text.x-java.Braces_5f_DO_5f_WHILE_5f_LOOP.enabled>true</org-netbeans-spi-editor-hints-projects.text.x-java.Braces_5f_DO_5f_WHILE_5f_LOOP.enabled>
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
         <org-netbeans-spi-editor-hints-projects.text.x-java.Javac_5f_DIVISION_5f_BY_5f_ZERO.enabled>false</org-netbeans-spi-editor-hints-projects.text.x-java.Javac_5f_DIVISION_5f_BY_5f_ZERO.enabled>
+        <netbeans.hint.jdkPlatform>JDK_20</netbeans.hint.jdkPlatform>
+        <org-netbeans-modules-editor-indent.CodeStyle.project.text-line-wrap>words</org-netbeans-modules-editor-indent.CodeStyle.project.text-line-wrap>
     </properties>
 </project-shared-configuration>

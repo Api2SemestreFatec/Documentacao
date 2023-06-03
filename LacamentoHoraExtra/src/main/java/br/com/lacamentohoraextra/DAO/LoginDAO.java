@@ -30,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,7 +63,7 @@ public class LoginDAO {
                         perfil = resultSet.getString("nivel_acesso");
                         Globals.setUserID(resultSet.getInt("id"));
                     } else {
-                        throw new SQLException("Invalid username or password");
+                        JOptionPane.showMessageDialog(null,"Verifique os campos.");
                     }
                 }
                 catch (SQLException e) {

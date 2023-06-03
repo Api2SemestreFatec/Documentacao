@@ -27,6 +27,8 @@ import br.com.lacamentohoraextra.DAO.ApontamentoDAO;
 import br.com.lacamentohoraextra.Models.ApontamentoModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +45,14 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
     public ApontamentoHistorico() {
         initComponents();
         lblTotal.setText("Total: " + Integer.toString(0));
+        CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+            try {
+                popularTabela();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(ApontamentoHistorico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     public void popularTabela() throws SQLException {
@@ -125,9 +135,16 @@ public class ApontamentoHistorico extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tabela.setSelectionBackground(new java.awt.Color(153, 204, 255));

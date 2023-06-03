@@ -32,6 +32,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -48,6 +50,15 @@ public class TelaAprovacao extends javax.swing.JPanel {
      */
     public TelaAprovacao() {
         initComponents();
+        
+        CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+            try {
+                popularTabela();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(ApontamentoHistorico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     public void popularTabela() throws SQLException {

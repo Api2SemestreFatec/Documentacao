@@ -87,7 +87,6 @@ public class Login extends javax.swing.JFrame {
         btnEntrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         btnEntrar.setBorderPainted(false);
         btnEntrar.setName("btnEntrar"); // NOI18N
-        btnEntrar.setOpaque(false);
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
@@ -97,9 +96,6 @@ public class Login extends javax.swing.JFrame {
         loginIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icon-login-64.png"))); // NOI18N
         loginIcon.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        loginIcon.setMaximumSize(new java.awt.Dimension(64, 64));
-        loginIcon.setMinimumSize(new java.awt.Dimension(64, 64));
-        loginIcon.setPreferredSize(new java.awt.Dimension(64, 64));
 
         lblLogin.setBackground(new java.awt.Color(255, 255, 255));
         lblLogin.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -113,30 +109,29 @@ public class Login extends javax.swing.JFrame {
             loginContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginContentLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(loginContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(loginContentLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(loginContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(loginContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(loginIcon)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         loginContentLayout.setVerticalGroup(
             loginContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginContentLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(loginIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

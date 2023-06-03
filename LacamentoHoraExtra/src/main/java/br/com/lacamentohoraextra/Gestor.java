@@ -51,7 +51,7 @@ public class Gestor extends javax.swing.JFrame {
         btnAprovacao.setSelected(false);
         btnDashboard.setSelected(true);
         btnLancamento.setSelected(false);
-        showApontamento(Dashboard.class);
+        showApontamento(TelaAprovacao.class);
     }
 
     private void showApontamento(Class<?> gestorClass) {
@@ -261,6 +261,7 @@ public class Gestor extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Gestor().setVisible(true);
             }
