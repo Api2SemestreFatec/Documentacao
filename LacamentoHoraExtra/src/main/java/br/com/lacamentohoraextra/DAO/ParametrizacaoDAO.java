@@ -23,13 +23,12 @@
  */
 package br.com.lacamentohoraextra.DAO;
 
-import br.com.lacamentohoraextra.Models.ProjetoModel;
+import br.com.lacamentohoraextra.Models.ParametrizacaoModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,67 +36,34 @@ import java.util.logging.Logger;
  *
  * @author daviramos
  */
-public class ProjetoDAO {
-     public static ArrayList<ProjetoModel> listarProjetos() throws SQLException {
-        ArrayList<ProjetoModel> lista = new ArrayList<>();
+public class ParametrizacaoDAO {
+
+    public static ArrayList<ParametrizacaoModel> listarParametrizacaoTabela() throws SQLException {
+        ArrayList<ParametrizacaoModel> lista = new ArrayList<>();
         Connection connection = ConexaoSQL.iniciarConexao();
-        
+
         if (ConexaoSQL.status == true) {
             PreparedStatement consultaSQL;
             ResultSet resultSet;
             try {
-                String query = "SELECT id, nome, cliente, verba, cr, equipe FROM public.projeto";
+                String query = "SELECT cliente, projeto, data_fechamento, tipo_hora, periodo, percentual, adicional_noturno, horario_inicio, horario_fim FROM public.vw_dados_parametrizacao";
                 consultaSQL = connection.prepareStatement(query);
                 resultSet = consultaSQL.executeQuery();
-                
+
                 while (resultSet.next()) {
-                    ProjetoModel projeto = new ProjetoModel();
-                    
-                    projeto.setId(resultSet.getInt("id"));
-                    projeto.setNome(resultSet.getString("nome"));
-                    projeto.setCliente(resultSet.getString("cliente"));
-                    projeto.setVerba(resultSet.getString("verba"));
-                    projeto.setCr(resultSet.getString("cr"));
-                    projeto.setEquipe(resultSet.getString("equipe"));
-                    
-                    lista.add(projeto);
-                }
-                connection.close();
-            }
-            catch (SQLException e) {
-                Logger.getLogger(
-                        ConexaoSQL.class.getName()).log(
-                        Level.SEVERE,
-                        e.getMessage(),
-                        e);
-            }
-            finally {
-                if (connection != null) {
-                    connection.close();
-                }
-            }
-        }
-        return lista;
-    }
-     
-     public List<ProjetoModel> listarNomeProjeto() throws SQLException {
-        List<ProjetoModel> lista = new ArrayList<>();
-        Connection connection = ConexaoSQL.iniciarConexao();
-        
-        if (ConexaoSQL.status == true) {
-            PreparedStatement consultaSQL;
-            ResultSet resultSet;
-            try {
-                String query = "SELECT nome FROM projeto group by nome";
-                consultaSQL = connection.prepareStatement(query);
-                resultSet = consultaSQL.executeQuery();
-                
-                while (resultSet.next()) {
-                    ProjetoModel projeto = new ProjetoModel();
-                    
-                    projeto.setNome(resultSet.getString("nome"));
-                    
-                    lista.add(projeto);
+                    ParametrizacaoModel parametrizacaoModel = new ParametrizacaoModel();
+
+                    parametrizacaoModel.setCliente(resultSet.getString("cliente"));
+                    parametrizacaoModel.setProjeto(resultSet.getString("projeto"));
+                    parametrizacaoModel.setData_fechamento(resultSet.getString("data_fechamento"));
+                    parametrizacaoModel.setTipo_hora(resultSet.getString("tipo_hora"));
+                    parametrizacaoModel.setPeriodo(resultSet.getString("periodo"));
+                    parametrizacaoModel.setPercentual(resultSet.getString("percentual"));
+                    parametrizacaoModel.setAdicional_noturno(resultSet.getString("adicional_noturno"));
+                    parametrizacaoModel.setHorario_inicio(resultSet.getString("horario_inicio"));
+                    parametrizacaoModel.setHorario_fim(resultSet.getString("horario_fim"));
+
+                    lista.add(parametrizacaoModel);
                 }
                 connection.close();
             }

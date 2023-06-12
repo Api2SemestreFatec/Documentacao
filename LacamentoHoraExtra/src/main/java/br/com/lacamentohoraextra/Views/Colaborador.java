@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package br.com.lacamentohoraextra;
+package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.Login;
 import br.com.lacamentohoraextra.Views.ApontamentoHistorico;
 import br.com.lacamentohoraextra.Views.ApontamentoHoraExtra;
 import com.formdev.flatlaf.FlatIntelliJLaf;

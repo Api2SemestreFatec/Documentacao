@@ -167,6 +167,11 @@ public class TelaListaProjeto extends javax.swing.JFrame {
         btnAtualizarTabela.setForeground(new java.awt.Color(255, 255, 255));
         btnAtualizarTabela.setText("Atualizar tabela");
         btnAtualizarTabela.setBorder(null);
+        btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarTabelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout conteudoLayout = new javax.swing.GroupLayout(conteudo);
         conteudo.setLayout(conteudoLayout);
@@ -220,6 +225,19 @@ public class TelaListaProjeto extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
+        try {
+            popularTabela();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(
+                    TelaListaProjeto.class.getName()).log(
+                    Level.SEVERE,
+                    e.getMessage(),
+                    e);
+        }
+    }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
 
     /**
      * @param args the command line arguments

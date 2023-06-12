@@ -120,9 +120,6 @@
         </Property>
         <Property name="name" type="java.lang.String" value="username" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTipoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRazaoSocial">
       <Properties>
@@ -243,9 +240,6 @@
         </Property>
         <Property name="name" type="java.lang.String" value="username" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeFantasiaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
       <Properties>
@@ -322,6 +316,9 @@
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="enviar" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarClienteActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

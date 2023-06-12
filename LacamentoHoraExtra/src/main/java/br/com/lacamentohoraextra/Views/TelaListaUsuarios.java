@@ -26,6 +26,7 @@ package br.com.lacamentohoraextra.Views;
 import br.com.lacamentohoraextra.DAO.ConexaoSQL;
 import br.com.lacamentohoraextra.DAO.UsuariosDAO;
 import br.com.lacamentohoraextra.Models.UsuariosModel;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
@@ -54,7 +55,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
      */
     public TelaListaUsuarios() {
         initComponents();
-
         lblTotal.setText("Total: " + Integer.toString(0));
 
         CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
@@ -63,6 +63,56 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
             }
             catch (SQLException ex) {
                 Logger.getLogger(TelaListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        btnExportar.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            int result = fileChooser.showSaveDialog(this);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                String filePath = fileChooser.getSelectedFile().getPath();
+
+                if (!filePath.toLowerCase().endsWith(".csv")) {
+                    filePath += ".csv";
+                }
+
+                try {
+
+                    Connection connection = ConexaoSQL.iniciarConexao();
+                    Statement statement = connection.createStatement();
+
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM relatorio_de_apontamentos");
+
+                    try (FileWriter writer = new FileWriter(filePath)) {
+                        writer.append("Matricula, Nome Usuario, Verba, Quantidade de horas, Cliente, CR, Nome Projeto, Justificativa\n");
+
+                        while (resultSet.next()) {
+                            String matricula = resultSet.getString("matricula");
+                            String nomeUsuario = resultSet.getString("nome_usuario");
+                            String verba = resultSet.getString("verba");
+                            String intervalo = resultSet.getString("intervalo");
+                            String nomeCliente = resultSet.getString("nome_cliente");
+                            String cr = resultSet.getString("cr");
+                            String nomeProjeto = resultSet.getString("nome_projeto");
+                            String justificativa = resultSet.getString("justificativa");
+
+                            writer.append(matricula).append(",").append(nomeUsuario).append(",").append(verba).append(",")
+                                    .append(intervalo).append(",").append(nomeCliente).append(",").append(cr).append(",")
+                                    .append(nomeProjeto).append(",").append(justificativa).append("\n");
+                        }
+
+                        writer.flush();
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Dados exportados para CSV com sucesso");
+                }
+                catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao exportar os dados para CSV", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (HeadlessException | SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao acessar o banco de dados", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -103,53 +153,52 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         thread.start();
     }
 
-    private void exportToCSV() {
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showSaveDialog(this);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String filePath = fileChooser.getSelectedFile().getPath();
-
-            try {
-
-                Connection connection = ConexaoSQL.iniciarConexao();
-                Statement statement = connection.createStatement();
-
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM relatorio_de_apontamentos");
-
-                FileWriter writer = new FileWriter(filePath);
-
-                writer.append("Matricula, Nome Usuario, Verba, Intervalo, Nome Cliente, CR, Nome Projeto, Justificativa\n");
-
-                while (resultSet.next()) {
-                    String matricula = resultSet.getString("matricula");
-                    String nomeUsuario = resultSet.getString("nome_usuario");
-                    String verba = resultSet.getString("verba");
-                    String intervalo = resultSet.getString("intervalo");
-                    String nomeCliente = resultSet.getString("nome_cliente");
-                    String cr = resultSet.getString("cr");
-                    String nomeProjeto = resultSet.getString("nome_projeto");
-                    String justificativa = resultSet.getString("justificativa");
-
-                    writer.append(matricula).append(",").append(nomeUsuario).append(",").append(verba).append(",")
-                            .append(intervalo).append(",").append(nomeCliente).append(",").append(cr).append(",")
-                            .append(nomeProjeto).append(",").append(justificativa).append("\n");
-                }
-
-                writer.flush();
-                writer.close();
-
-                JOptionPane.showMessageDialog(this, "Data exported to CSV successfully.");
-            }
-            catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Error exporting data to CSV.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error accessing the database.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
+//    private void exportToCSV() {
+//        JFileChooser fileChooser = new JFileChooser();
+//        int result = fileChooser.showSaveDialog(this);
+//
+//        if (result == JFileChooser.APPROVE_OPTION) {
+//            String filePath = fileChooser.getSelectedFile().getPath() + "/usuarios-relatorio.csv";
+//
+//            try {
+//
+//                Connection connection = ConexaoSQL.iniciarConexao();
+//                Statement statement = connection.createStatement();
+//
+//                ResultSet resultSet = statement.executeQuery("SELECT * FROM relatorio_de_apontamentos");
+//
+//                FileWriter writer = new FileWriter(filePath);
+//
+//                writer.append("Matricula, Nome Usuario, Verba, Intervalo, Nome Cliente, CR, Nome Projeto, Justificativa\n");
+//
+//                while (resultSet.next()) {
+//                    String matricula = resultSet.getString("matricula");
+//                    String nomeUsuario = resultSet.getString("nome_usuario");
+//                    String verba = resultSet.getString("verba");
+//                    String intervalo = resultSet.getString("intervalo");
+//                    String nomeCliente = resultSet.getString("nome_cliente");
+//                    String cr = resultSet.getString("cr");
+//                    String nomeProjeto = resultSet.getString("nome_projeto");
+//                    String justificativa = resultSet.getString("justificativa");
+//
+//                    writer.append(matricula).append(",").append(nomeUsuario).append(",").append(verba).append(",")
+//                            .append(intervalo).append(",").append(nomeCliente).append(",").append(cr).append(",")
+//                            .append(nomeProjeto).append(",").append(justificativa).append("\n");
+//                }
+//
+//                writer.flush();
+//                writer.close();
+//
+//                JOptionPane.showMessageDialog(this, "Dados exportados para CSV com sucesso");
+//            }
+//            catch (IOException ex) {
+//                JOptionPane.showMessageDialog(this, "Erro ao exportar os dados para CSV", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//            catch (Exception ex) {
+//                JOptionPane.showMessageDialog(this, "Erro ao acessar o banco de dados", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,11 +265,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         btnExportar.setForeground(new java.awt.Color(0, 0, 102));
         btnExportar.setText("Exportar Relatório");
         btnExportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102)));
-        btnExportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportarActionPerformed(evt);
-            }
-        });
 
         lblTotal.setBackground(new java.awt.Color(255, 255, 255));
         lblTotal.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
@@ -278,12 +322,6 @@ public class TelaListaUsuarios extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-        btnExportar.addActionListener(e -> {
-            exportToCSV();
-        });
-    }//GEN-LAST:event_btnExportarActionPerformed
 
     /**
      * @param args the command line arguments

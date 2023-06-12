@@ -23,6 +23,15 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ConexaoSQL;
+import br.com.lacamentohoraextra.utils.Globals;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daviramos
@@ -34,6 +43,56 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
      */
     public TelaCadastroCliente() {
         initComponents();
+    }
+
+    public void cadastrarCliente() throws SQLException {
+        String tipoCliente = txtTipo.getText();
+        String razaoSocial = txtRazaoSocial.getText();
+        String nomeFantasia = txtNomeFantasia.getText();
+        String cpnj = txtCNPJ.getText();
+        String telefone = txtTelefone.getText();
+        String email = txtEmail.getText();
+
+        Connection connection = ConexaoSQL.iniciarConexao();
+
+        if (ConexaoSQL.status == true) {
+            PreparedStatement insertSQL = null;
+
+            try {
+
+                String query = " INSERT INTO public.cliente (nome, nome_fantasia, cnpj, telefone, email, id_usuario, tipo_cliente) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                insertSQL = connection.prepareStatement(query);
+                insertSQL.setString(1, razaoSocial);
+                insertSQL.setString(2, nomeFantasia);
+                insertSQL.setString(3, cpnj);
+                insertSQL.setString(4, telefone);
+                insertSQL.setString(5, email);
+                insertSQL.setInt(6, Globals.getUserID());
+                insertSQL.setString(7, tipoCliente);
+                insertSQL.executeUpdate();
+            }
+            catch (SQLException e) {
+                Logger.getLogger(TelaCadastroUsuarios.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            }
+            finally {
+                if (insertSQL != null) {
+                    insertSQL.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+
+                txtTipo.setText("");
+                txtRazaoSocial.setText("");
+                txtNomeFantasia.setText("");
+                txtCNPJ.setText("");
+                txtTelefone.setText("");
+                txtEmail.setText("");
+
+                JOptionPane.showMessageDialog(TelaCadastroCliente.this,
+                        "Cliente cadastrado com sucesso!");
+            }
+        }
     }
 
     /**
@@ -65,11 +124,6 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
         txtTipo.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Tipo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
         txtTipo.setDisabledTextColor(new java.awt.Color(0, 0, 102));
         txtTipo.setName("username"); // NOI18N
-        txtTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTipoActionPerformed(evt);
-            }
-        });
 
         txtRazaoSocial.setBackground(new java.awt.Color(255, 255, 255));
         txtRazaoSocial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -98,11 +152,6 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
         txtNomeFantasia.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Nome fantasia", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 14), new java.awt.Color(0, 51, 102))); // NOI18N
         txtNomeFantasia.setDisabledTextColor(new java.awt.Color(0, 0, 102));
         txtNomeFantasia.setName("username"); // NOI18N
-        txtNomeFantasia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeFantasiaActionPerformed(evt);
-            }
-        });
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -130,6 +179,11 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
         btnSalvarCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnSalvarCliente.setBorderPainted(false);
         btnSalvarCliente.setName("enviar"); // NOI18N
+        btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,18 +236,19 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoActionPerformed
-
-    private void txtNomeFantasiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeFantasiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeFantasiaActionPerformed
-
     private void btnListaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaClienteActionPerformed
         TelaListaClientes lista = new TelaListaClientes();
         lista.setVisible(true);
     }//GEN-LAST:event_btnListaClienteActionPerformed
+
+    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
+        try {
+            cadastrarCliente();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(TelaCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

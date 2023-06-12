@@ -39,8 +39,8 @@ import java.util.logging.Logger;
  */
 public class ClienteDAO {
 
-    public List<ClienteModel> listarClientes() throws SQLException {
-        List<ClienteModel> lista = new ArrayList<>();
+    public static ArrayList<ClienteModel> listarClientes() throws SQLException {
+        ArrayList<ClienteModel> lista = new ArrayList<>();
         Connection connection = ConexaoSQL.iniciarConexao();
         
         if (ConexaoSQL.status == true) {
@@ -80,8 +80,8 @@ public class ClienteDAO {
         return lista;
     }
     
-    public List<ClienteModel> listarClientesNome() throws SQLException {
-        List<ClienteModel> lista = new ArrayList<>();
+    public static ArrayList<ClienteModel> listarClientesNome() throws SQLException {
+        ArrayList<ClienteModel> lista = new ArrayList<>();
         Connection connection = ConexaoSQL.iniciarConexao();
         
         if (ConexaoSQL.status == true) {

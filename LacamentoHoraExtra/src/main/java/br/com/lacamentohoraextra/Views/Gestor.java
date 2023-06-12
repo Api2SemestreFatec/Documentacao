@@ -1,12 +1,31 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2023 daviramos.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
-package br.com.lacamentohoraextra;
+package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.Login;
 import br.com.lacamentohoraextra.Views.Dashboard;
 import br.com.lacamentohoraextra.Views.TelaAprovacao;
-import br.com.lacamentohoraextra.Views.TelaCadastro;
 import br.com.lacamentohoraextra.Views.TelaLancamento;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.BorderLayout;
@@ -21,34 +40,36 @@ import javax.swing.JPanel;
  *
  * @author daviramos
  */
-public class Administrador extends javax.swing.JFrame {
+public class Gestor extends javax.swing.JFrame {
 
     /**
-     * Creates new form Main
+     * Creates new form Gestor
      */
-    public Administrador() {
+    public Gestor() {
         initComponents();
-        
-        showTela(TelaCadastro.class);
+        init();
     }
 
+    public void init() {
+        showApontamento(TelaAprovacao.class);
+    }
+    
     public void selecionarBotao(JButton botaoSelecionado) {
         btnDashboard.setSelected(false);
         btnLancamento.setSelected(false);
         btnAprovacao.setSelected(false);
-        btnCadastro.setSelected(false);
         
         botaoSelecionado.setSelected(true);
     }
 
-    private void showTela(Class<?> apontamentoClass) {
+    private void showApontamento(Class<?> gestorClass) {
         try {
-            JPanel apontamentoPanel = (JPanel) apontamentoClass.getDeclaredConstructor().newInstance();
-            apontamentoPanel.setSize(content.getWidth(), content.getHeight());
-            apontamentoPanel.setLocation(0, 0);
+            JPanel gestorPanel = (JPanel) gestorClass.getDeclaredConstructor().newInstance();
+            gestorPanel.setSize(content.getWidth(), content.getHeight());
+            gestorPanel.setLocation(0, 0);
 
             content.removeAll();
-            content.add(apontamentoPanel, BorderLayout.CENTER);
+            content.add(gestorPanel, BorderLayout.CENTER);
             content.revalidate();
             content.repaint();
         }
@@ -57,12 +78,12 @@ public class Administrador extends javax.swing.JFrame {
                 | NoSuchMethodException
                 | InvocationTargetException ex) {
             Logger.getLogger(
-                    Administrador.class.getName()).log(
+                    Gestor.class.getName()).log(
                     Level.SEVERE,
                     ex.getMessage(),
                     ex);
             JOptionPane.showMessageDialog(
-                    Administrador.this,
+                    Gestor.this,
                     "Database connection failed: " + ex.getMessage());
 
         }
@@ -82,19 +103,20 @@ public class Administrador extends javax.swing.JFrame {
         btnDashboard = new javax.swing.JButton();
         btnLancamento = new javax.swing.JButton();
         btnAprovacao = new javax.swing.JButton();
-        btnCadastro = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        setForeground(new java.awt.Color(0, 51, 51));
         setMinimumSize(new java.awt.Dimension(940, 600));
-        setName("mainframe"); // NOI18N
+        setName("gestorFrame"); // NOI18N
+        setResizable(false);
 
-        container.setBackground(new java.awt.Color(234, 238, 243));
+        container.setBackground(new java.awt.Color(255, 255, 255));
+        container.setForeground(new java.awt.Color(0, 0, 102));
+        container.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         container.setMinimumSize(new java.awt.Dimension(940, 600));
+        container.setPreferredSize(new java.awt.Dimension(940, 600));
 
         sidebarmenu.setBackground(new java.awt.Color(0, 51, 102));
         sidebarmenu.setForeground(new java.awt.Color(0, 51, 102));
@@ -103,6 +125,7 @@ public class Administrador extends javax.swing.JFrame {
         btnDashboard.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnDashboard.setForeground(new java.awt.Color(153, 204, 255));
         btnDashboard.setText("Dashboard");
+        btnDashboard.setBorder(null);
         btnDashboard.setContentAreaFilled(false);
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +136,7 @@ public class Administrador extends javax.swing.JFrame {
         btnLancamento.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnLancamento.setForeground(new java.awt.Color(153, 204, 255));
         btnLancamento.setText("Lançamentos");
+        btnLancamento.setBorder(null);
         btnLancamento.setContentAreaFilled(false);
         btnLancamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +147,7 @@ public class Administrador extends javax.swing.JFrame {
         btnAprovacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAprovacao.setForeground(new java.awt.Color(153, 204, 255));
         btnAprovacao.setText("Aprovar");
+        btnAprovacao.setBorder(null);
         btnAprovacao.setContentAreaFilled(false);
         btnAprovacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,19 +155,12 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
-        btnCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        btnCadastro.setForeground(new java.awt.Color(153, 204, 255));
-        btnCadastro.setText("Cadastro");
-        btnCadastro.setContentAreaFilled(false);
-        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroActionPerformed(evt);
-            }
-        });
-
-        btnSair.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnSair.setBackground(new java.awt.Color(255, 255, 255));
+        btnSair.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSair.setForeground(new java.awt.Color(153, 204, 255));
         btnSair.setText("Sair");
+        btnSair.setActionCommand("sair");
+        btnSair.setBorder(null);
         btnSair.setContentAreaFilled(false);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,8 +178,7 @@ public class Administrador extends javax.swing.JFrame {
                     .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLancamento, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(btnAprovacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidebarmenuLayout.setVerticalGroup(
@@ -170,20 +187,16 @@ public class Administrador extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAprovacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(24, 24, 24))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setForeground(new java.awt.Color(0, 51, 102));
-        content.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        content.setMinimumSize(new java.awt.Dimension(764, 600));
         content.setPreferredSize(new java.awt.Dimension(764, 600));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
@@ -204,8 +217,7 @@ public class Administrador extends javax.swing.JFrame {
             .addGroup(containerLayout.createSequentialGroup()
                 .addComponent(sidebarmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,13 +229,15 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,25 +250,20 @@ public class Administrador extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        selecionarBotao(btnCadastro);
-        showTela(TelaCadastro.class);
-    }//GEN-LAST:event_btnCadastroActionPerformed
-
-    private void btnLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancamentoActionPerformed
-        selecionarBotao(btnLancamento);
-        showTela(TelaLancamento.class);
-    }//GEN-LAST:event_btnLancamentoActionPerformed
-
     private void btnAprovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprovacaoActionPerformed
         selecionarBotao(btnAprovacao);
-        showTela(TelaAprovacao.class);
+        showApontamento(TelaAprovacao.class);
     }//GEN-LAST:event_btnAprovacaoActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         selecionarBotao(btnDashboard);
-        showTela(Dashboard.class);
+        showApontamento(Dashboard.class);
     }//GEN-LAST:event_btnDashboardActionPerformed
+
+    private void btnLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancamentoActionPerformed
+        selecionarBotao(btnLancamento);
+        showApontamento(TelaLancamento.class);
+    }//GEN-LAST:event_btnLancamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,13 +276,13 @@ public class Administrador extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Administrador().setVisible(true);
+                new Gestor().setVisible(true);
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAprovacao;
-    private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnLancamento;
     private javax.swing.JButton btnSair;

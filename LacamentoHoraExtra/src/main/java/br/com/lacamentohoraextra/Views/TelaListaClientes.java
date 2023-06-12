@@ -23,6 +23,18 @@
  */
 package br.com.lacamentohoraextra.Views;
 
+import br.com.lacamentohoraextra.DAO.ClienteDAO;
+import br.com.lacamentohoraextra.DAO.ProjetoDAO;
+import br.com.lacamentohoraextra.Models.ClienteModel;
+import br.com.lacamentohoraextra.Models.ProjetoModel;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author daviramos
@@ -34,6 +46,53 @@ public class TelaListaClientes extends javax.swing.JFrame {
      */
     public TelaListaClientes() {
         initComponents();
+        lblTotal.setText("Total: " + Integer.toString(0));
+        
+        CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
+            try {
+                popularTabela();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(TelaListaProjeto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+    public void popularTabela() throws SQLException {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.setNumRows(0);
+
+        Thread thread = new Thread(() -> {
+            try {
+                Object colunas[] = new Object[5];
+                ClienteModel clienteModel = new ClienteModel();
+
+                ArrayList<ClienteModel> listaProjetos = new ArrayList<ClienteModel>();
+                listaProjetos = ClienteDAO.listarClientes();
+
+                for (int i = 0; i < listaProjetos.size(); i++) {
+                    clienteModel = listaProjetos.get(i);
+
+                    colunas[0] = clienteModel.getNomeCliente();
+                    colunas[1] = clienteModel.getNomeFantasia();
+                    colunas[2] = clienteModel.getCnpj();
+                    colunas[3] = clienteModel.getEmail();
+                    colunas[4] = clienteModel.getTelefone();
+                    
+                    model.addRow(colunas);
+
+                    lblTotal.setText("Total: " + listaProjetos.size());
+                }
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(
+                        ApontamentoHistorico.class.getName()).log(
+                        Level.SEVERE,
+                        ex.getMessage(),
+                        ex);
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -46,11 +105,11 @@ public class TelaListaClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        scrollPane = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
         lblTitulo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        btnAtualizarTabela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
@@ -64,25 +123,22 @@ public class TelaListaClientes extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(7640, 6000));
         jPanel1.setPreferredSize(new java.awt.Dimension(764, 600));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setBackground(new java.awt.Color(255, 255, 255));
+        tabela.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tabela.setForeground(new java.awt.Color(0, 0, 102));
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Title 2", "Title 3", "Title 4"
+                "Nome", "Nome fantasia", "CNPJ", "E-mail", "Telefone"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -93,15 +149,9 @@ public class TelaListaClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(153, 204, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 102));
-        jScrollPane1.setViewportView(jTable1);
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por..." }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Filtro", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Liberation Sans", 0, 15), new java.awt.Color(0, 0, 102))); // NOI18N
+        tabela.setSelectionBackground(new java.awt.Color(153, 204, 255));
+        tabela.setSelectionForeground(new java.awt.Color(0, 0, 102));
+        scrollPane.setViewportView(tabela);
 
         lblTitulo.setBackground(new java.awt.Color(255, 255, 255));
         lblTitulo.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -109,10 +159,20 @@ public class TelaListaClientes extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Lista de Clientes");
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel1.setText("0");
+        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 0, 102));
+        lblTotal.setText("0");
+
+        btnAtualizarTabela.setBackground(new java.awt.Color(0, 51, 102));
+        btnAtualizarTabela.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizarTabela.setText("Atualizar tabela");
+        btnAtualizarTabela.setBorder(null);
+        btnAtualizarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarTabelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,25 +186,27 @@ public class TelaListaClientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(lblTotal))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAtualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE))))
+                .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addComponent(btnAtualizarTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblTotal)
                 .addGap(20, 20, 20))
         );
 
@@ -164,6 +226,19 @@ public class TelaListaClientes extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtualizarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaActionPerformed
+        try {
+            popularTabela();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(
+                    TelaListaClientes.class.getName()).log(
+                    Level.SEVERE,
+                    e.getMessage(),
+                    e);
+        }
+    }//GEN-LAST:event_btnAtualizarTabelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +273,7 @@ public class TelaListaClientes extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TelaListaClientes().setVisible(true);
             }
@@ -205,11 +281,11 @@ public class TelaListaClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnAtualizarTabela;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }
